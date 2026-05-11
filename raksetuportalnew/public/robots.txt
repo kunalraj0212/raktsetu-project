@@ -1,0 +1,10 @@
+# RaktSetu Robots
+User-agent: *
+Allow: /
+Sitemap: https://raktsetu.com/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /

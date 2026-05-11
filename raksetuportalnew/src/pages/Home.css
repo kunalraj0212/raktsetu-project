@@ -1,0 +1,1207 @@
+/* ============================================================
+   HOME PAGE — IMMERSIVE HERO + SECTIONS
+   ============================================================ */
+
+/* ==========================================
+   HERO — FLUID ART
+   ========================================== */
+.hero-immersive {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: #0a0a0a;
+}
+
+/* Fluid background blobs */
+.fluid-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 40% 60% 70% 30% / 50% 40% 60% 50%;
+    filter: blur(60px);
+    opacity: 0.5;
+    animation: blobMorph 20s ease-in-out infinite;
+}
+
+.blob-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #CC0000 0%, #8B0000 40%, transparent 70%);
+    top: -15%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #FF2222 0%, #990000 40%, transparent 70%);
+    bottom: -20%;
+    right: -5%;
+    animation-delay: -5s;
+    animation-duration: 25s;
+    border-radius: 60% 40% 30% 70% / 40% 50% 60% 50%;
+}
+
+.blob-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #B22222 0%, #660000 50%, transparent 70%);
+    top: 30%;
+    right: 25%;
+    animation-delay: -10s;
+    animation-duration: 18s;
+    opacity: 0.35;
+}
+
+.blob-4 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, #FFB347 0%, #CC8800 40%, transparent 70%);
+    bottom: 20%;
+    left: 15%;
+    animation-delay: -7s;
+    animation-duration: 22s;
+    opacity: 0.2;
+}
+
+.fluid-noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+@keyframes blobMorph {
+
+    0%,
+    100% {
+        border-radius: 40% 60% 70% 30% / 50% 40% 60% 50%;
+        transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+        border-radius: 60% 40% 30% 70% / 40% 60% 50% 60%;
+        transform: translate(30px, -40px) scale(1.08);
+    }
+
+    50% {
+        border-radius: 50% 50% 40% 60% / 60% 50% 50% 40%;
+        transform: translate(-20px, 20px) scale(0.95);
+    }
+
+    75% {
+        border-radius: 30% 70% 60% 40% / 50% 40% 60% 50%;
+        transform: translate(15px, 30px) scale(1.05);
+    }
+}
+
+/* Particles */
+.particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 60, 60, 0.6);
+    border-radius: 50%;
+    animation: particleFloat 15s ease-in-out infinite;
+}
+
+.p-0 {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+    animation-duration: 12s;
+}
+
+.p-1 {
+    top: 20%;
+    left: 80%;
+    animation-delay: -2s;
+    animation-duration: 18s;
+    width: 6px;
+    height: 6px;
+}
+
+.p-2 {
+    top: 60%;
+    left: 15%;
+    animation-delay: -4s;
+    animation-duration: 14s;
+}
+
+.p-3 {
+    top: 70%;
+    left: 70%;
+    animation-delay: -6s;
+    animation-duration: 16s;
+    width: 5px;
+    height: 5px;
+}
+
+.p-4 {
+    top: 30%;
+    left: 40%;
+    animation-delay: -8s;
+    animation-duration: 20s;
+}
+
+.p-5 {
+    top: 85%;
+    left: 50%;
+    animation-delay: -3s;
+    animation-duration: 13s;
+    width: 3px;
+    height: 3px;
+}
+
+.p-6 {
+    top: 15%;
+    left: 60%;
+    animation-delay: -5s;
+    animation-duration: 17s;
+    background: rgba(255, 179, 71, 0.4);
+}
+
+.p-7 {
+    top: 50%;
+    left: 90%;
+    animation-delay: -7s;
+    animation-duration: 15s;
+}
+
+.p-8 {
+    top: 40%;
+    left: 25%;
+    animation-delay: -1s;
+    animation-duration: 19s;
+    width: 3px;
+    height: 3px;
+}
+
+.p-9 {
+    top: 75%;
+    left: 35%;
+    animation-delay: -9s;
+    animation-duration: 11s;
+}
+
+.p-10 {
+    top: 5%;
+    left: 45%;
+    animation-delay: -4s;
+    animation-duration: 16s;
+    background: rgba(255, 200, 100, 0.3);
+}
+
+.p-11 {
+    top: 55%;
+    left: 55%;
+    animation-delay: -6s;
+    animation-duration: 22s;
+}
+
+@keyframes particleFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.5;
+    }
+
+    25% {
+        transform: translate(40px, -30px) scale(1.5);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(-20px, 50px) scale(0.8);
+        opacity: 0.3;
+    }
+
+    75% {
+        transform: translate(30px, 20px) scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+/* Blood drop SVG */
+.hero-blood-drop {
+    position: absolute;
+    right: 5%;
+    bottom: 10%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.15;
+}
+
+.drop-svg {
+    width: 180px;
+    height: 252px;
+    animation: dropPulse 3s ease-in-out infinite;
+}
+
+.drop-path {
+    animation: dropFill 4s ease-in-out infinite;
+}
+
+@keyframes dropPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes dropFill {
+
+    0%,
+    100% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Hero content grid */
+.hero-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(139, 0, 0, 0.3);
+    border: 1px solid rgba(255, 60, 60, 0.2);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    color: #FF8888;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 1.25rem;
+    animation: badgePulse 3s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 60, 60, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(255, 60, 60, 0);
+    }
+}
+
+.hero-headline {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+    letter-spacing: -1px;
+}
+
+.hero-accent {
+    background: linear-gradient(135deg, #FF4444, #FFB347);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-sub {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.hero-btn-glow {
+    box-shadow: 0 0 25px rgba(139, 0, 0, 0.5), 0 0 60px rgba(139, 0, 0, 0.15);
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 25px rgba(139, 0, 0, 0.5), 0 0 60px rgba(139, 0, 0, 0.15);
+    }
+
+    50% {
+        box-shadow: 0 0 35px rgba(204, 0, 0, 0.7), 0 0 80px rgba(139, 0, 0, 0.25);
+    }
+}
+
+.hero-btn-outline {
+    background: transparent !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    color: #FFFFFF !important;
+}
+
+.hero-btn-outline:hover {
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Hero live stats */
+.hero-live-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.live-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.live-num {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #FFFFFF;
+}
+
+.live-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.live-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Glass cards stack */
+.hero-cards-area {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.glass-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    color: #FFFFFF;
+    animation: slideInCard 0.8s ease-out both;
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-4px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.gc-1 {
+    animation-delay: 0.2s;
+}
+
+.gc-2 {
+    animation-delay: 0.4s;
+}
+
+.gc-3 {
+    animation-delay: 0.6s;
+}
+
+.gc-4 {
+    animation-delay: 0.8s;
+}
+
+@keyframes slideInCard {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.gc-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.gc-red {
+    background: rgba(204, 0, 0, 0.3);
+}
+
+.gc-orange {
+    background: rgba(255, 165, 0, 0.25);
+}
+
+.gc-green {
+    background: rgba(34, 197, 94, 0.25);
+}
+
+.gc-blue {
+    background: rgba(59, 130, 246, 0.25);
+}
+
+.gc-body strong {
+    display: block;
+    font-size: 0.85rem;
+}
+
+.gc-body span {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.gc-badge {
+    margin-left: auto;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.gc-badge.available {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ADE80;
+}
+
+.gc-badge.urgent {
+    background: rgba(255, 165, 0, 0.25);
+    color: #FFB347;
+    animation: urgentPulse 1.5s ease-in-out infinite;
+}
+
+.gc-badge.matched {
+    background: rgba(34, 197, 94, 0.3);
+    color: #4ADE80;
+}
+
+@keyframes urgentPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* ==========================================
+   BLOOD GROUP AVAILABILITY BAR
+   ========================================== */
+.blood-group-bar {
+    background: #111111;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bg-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.bg-bar-title {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.bg-group-grid {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.bg-group-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.bg-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+    border: 2px solid;
+    transition: all 0.3s;
+}
+
+.bg-circle:hover {
+    transform: scale(1.15);
+}
+
+.bg-circle.high {
+    border-color: #22C55E;
+    color: #22C55E;
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.bg-circle.medium {
+    border-color: #FFB347;
+    color: #FFB347;
+    background: rgba(255, 179, 71, 0.1);
+}
+
+.bg-circle.low {
+    border-color: #FF4444;
+    color: #FF4444;
+    background: rgba(255, 68, 68, 0.1);
+}
+
+.bg-label {
+    font-size: 0.7rem;
+}
+
+.bg-count {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================
+   SECTION HELPERS
+   ========================================== */
+.section-header {
+    margin-bottom: 2.5rem;
+}
+
+.section-tag {
+    display: inline-block;
+    background: var(--primary-bg);
+    color: var(--primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+}
+
+.section-subtitle {
+    color: var(--text-body);
+    font-size: 0.95rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   WORKFLOW SECTIONS
+   ========================================== */
+.workflows-section {
+    background: var(--gray-50);
+}
+
+.workflows-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.workflow-card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--gray-200);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+    overflow: hidden;
+    position: relative;
+}
+
+.workflow-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+}
+
+.wf-order::before {
+    background: linear-gradient(90deg, #CC0000, #FF4444);
+}
+
+.wf-donate::before {
+    background: linear-gradient(90deg, #16A34A, #4ADE80);
+}
+
+.wf-emergency::before {
+    background: linear-gradient(90deg, #D97706, #FBBF24);
+}
+
+.workflow-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: transparent;
+}
+
+.wf-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.wf-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.wf-red {
+    background: rgba(204, 0, 0, 0.1);
+    color: #CC0000;
+}
+
+.wf-green {
+    background: rgba(22, 163, 74, 0.1);
+    color: #16A34A;
+}
+
+.wf-amber {
+    background: rgba(217, 119, 6, 0.1);
+    color: #D97706;
+}
+
+.wf-header h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+}
+
+.wf-header p {
+    font-size: 0.82rem;
+    color: var(--gray-500);
+    line-height: 1.5;
+}
+
+/* Steps with connectors */
+.wf-steps {
+    flex: 1;
+    margin-bottom: 1.5rem;
+}
+
+.wf-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.wf-step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary-bg);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.wf-step-content strong {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+}
+
+.wf-step-content span {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+}
+
+.wf-connector {
+    width: 2px;
+    height: 20px;
+    background: var(--gray-200);
+    margin-left: 13px;
+}
+
+.wf-action {
+    text-decoration: none;
+}
+
+.wf-emergency-btn {
+    background: linear-gradient(135deg, #D97706, #F59E0B) !important;
+}
+
+.wf-emergency-btn:hover {
+    background: linear-gradient(135deg, #B45309, #D97706) !important;
+}
+
+/* ==========================================
+   SERVICES
+   ========================================== */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+}
+
+.service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.service-card:hover,
+.service-card.active-card {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.svc-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-lg);
+    background: var(--primary-bg);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-card span {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ==========================================
+   WHO CAN DONATE
+   ========================================== */
+.donate-section {
+    background: var(--gray-50);
+}
+
+.donate-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.donate-text {
+    color: var(--text-body);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.eligibility-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.eligibility-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.donate-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.donate-illustration {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(139, 0, 0, 0.08), rgba(204, 0, 0, 0.04));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.donor-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.donor-heart {
+    color: var(--primary);
+    animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.15);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.1);
+    }
+}
+
+.iv-line {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--primary), rgba(139, 0, 0, 0.3));
+}
+
+.blood-bag {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    background: var(--primary-bg);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(139, 0, 0, 0.2);
+}
+
+/* ==========================================
+   TESTIMONIALS
+   ========================================== */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.testimonial-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: all 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+}
+
+.t-quote {
+    font-size: 0.875rem;
+    color: var(--text-body);
+    line-height: 1.7;
+    font-style: italic;
+    flex: 1;
+}
+
+.t-quote::before {
+    content: '"';
+    display: none;
+}
+
+.t-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.t-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.t-author strong {
+    display: block;
+    font-size: 0.85rem;
+}
+
+.t-author span {
+    font-size: 0.72rem;
+    color: var(--gray-500);
+}
+
+/* ==========================================
+   IMPACT BAR
+   ========================================== */
+.impact-bar {
+    background: var(--primary);
+    padding: 2.5rem 0;
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+}
+
+.impact-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--white);
+}
+
+.impact-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================
+   CTA BANNER
+   ========================================== */
+.cta-banner {
+    padding: 4rem 0;
+    background: var(--gray-50);
+}
+
+.cta-inner h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.cta-inner p {
+    color: var(--text-body);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-white-border {
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 1024px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-sub {
+        margin: 0 auto 2rem;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-live-stats {
+        justify-content: center;
+    }
+
+    .hero-cards-area {
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    .hero-headline {
+        font-size: 2.75rem;
+    }
+
+    .hero-blood-drop {
+        opacity: 0.08;
+    }
+
+    .workflows-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-immersive {
+        min-height: 80vh;
+    }
+
+    .hero-headline {
+        font-size: 2.25rem;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .donate-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .eligibility-list {
+        align-items: center;
+    }
+
+    .donate-cta-group {
+        display: flex;
+        justify-content: center;
+    }
+
+    .impact-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .bg-group-grid {
+        gap: 0.75rem;
+    }
+
+    .bg-circle {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-headline {
+        font-size: 1.85rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-live-stats {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .live-divider {
+        height: 1px;
+        width: 40px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .blob-1,
+    .blob-2 {
+        width: 300px;
+        height: 300px;
+    }
+}

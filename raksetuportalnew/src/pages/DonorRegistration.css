@@ -1,0 +1,270 @@
+/* Donor Registration Page */
+.dr-hero {
+    background: var(--primary);
+    color: var(--white);
+    padding: 2rem 0;
+}
+
+.dr-hero h1 {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dr-hero p {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.dr-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Form */
+.dr-form {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+}
+
+.dr-form-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.dr-form-section:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.dr-form-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.dr-fields-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.dr-form .form-group label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.35rem;
+}
+
+.dr-form .form-group input,
+.dr-form .form-group select,
+.dr-form .form-group textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-family: inherit;
+    color: var(--text-dark);
+    transition: border-color var(--transition-fast);
+    resize: vertical;
+    background: var(--white);
+}
+
+.dr-form .form-group input:focus,
+.dr-form .form-group select:focus,
+.dr-form .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.dr-form .form-group input.error,
+.dr-form .form-group select.error,
+.dr-form .form-group textarea.error {
+    border-color: var(--danger);
+}
+
+.dr-terms {
+    margin: 1rem 0 1.5rem;
+}
+
+.dr-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-body);
+    cursor: pointer;
+}
+
+.dr-checkbox-label input[type="checkbox"] {
+    margin-top: 3px;
+    accent-color: var(--primary);
+}
+
+.dr-checkbox-label a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+/* Sidebar */
+.dr-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: 100px;
+}
+
+.dr-info-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+}
+
+.dr-info-icon {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+}
+
+.dr-info-card h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.dr-info-card p {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    line-height: 1.6;
+}
+
+.dr-info-card ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.dr-info-card li {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    padding: 0.2rem 0;
+}
+
+.dr-info-card li::before {
+    content: '•';
+    color: var(--primary);
+    margin-right: 0.4rem;
+    font-weight: 700;
+}
+
+/* Success card */
+.dr-success-card {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+}
+
+.dr-success-icon {
+    color: var(--success);
+    margin-bottom: 1rem;
+}
+
+.dr-success-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.dr-success-card>p {
+    color: var(--text-body);
+    margin-bottom: 1.5rem;
+}
+
+.dr-success-details {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+}
+
+.dr-detail span {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dr-detail strong {
+    font-size: 0.95rem;
+}
+
+.status-active {
+    color: var(--success) !important;
+}
+
+.dr-success-note {
+    font-size: 0.82rem;
+    color: var(--gray-500);
+    margin-bottom: 1.5rem;
+}
+
+.dr-success-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+@media (max-width: 900px) {
+    .dr-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dr-sidebar {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .dr-info-card {
+        flex: 1;
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 600px) {
+    .dr-fields-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dr-sidebar {
+        flex-direction: column;
+    }
+
+    .dr-success-details {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}

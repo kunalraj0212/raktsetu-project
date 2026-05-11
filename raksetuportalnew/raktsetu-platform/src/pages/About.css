@@ -1,0 +1,106 @@
+.about-hero {
+    background-color: var(--secondary-bg);
+    padding: 5rem 0 3rem;
+    text-align: center;
+}
+
+.about-title {
+    font-size: 3rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.about-subtitle {
+    font-size: 1.25rem;
+    color: var(--gray-500);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.mission-section {
+    padding: 5rem 0;
+    background-color: var(--white);
+}
+
+.mission-content h2 {
+    font-size: 2.25rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+}
+
+.mission-content>p {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    font-size: 1.15rem;
+    color: var(--gray-500);
+    line-height: 1.6;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+}
+
+.value-item {
+    text-align: center;
+    padding: 2rem;
+    background: var(--gray-100);
+    border-radius: var(--radius-lg);
+}
+
+.value-icon {
+    color: var(--primary-red);
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.5rem;
+}
+
+.value-item h3 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.value-item p {
+    color: var(--gray-500);
+}
+
+.story-section {
+    padding: 5rem 0;
+    background-color: var(--secondary-bg);
+}
+
+.story-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.image-placeholder-block {
+    width: 100%;
+    height: 400px;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-lg);
+}
+
+.story-text h2 {
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+}
+
+.story-text p {
+    font-size: 1.1rem;
+    color: var(--gray-500);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .story-container {
+        grid-template-columns: 1fr;
+    }
+}

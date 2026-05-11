@@ -1,0 +1,89 @@
+/* ==============================
+   BUTTON SYSTEM
+   ============================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Primary — dark maroon */
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
+
+/* Secondary — outlined */
+.btn-secondary {
+    background: var(--white);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+/* Outline — subtle */
+.btn-outline {
+    background: transparent;
+    color: var(--primary);
+    border-color: var(--gray-300);
+}
+
+.btn-outline:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+}
+
+/* Ghost */
+.btn-ghost {
+    background: transparent;
+    color: var(--primary);
+    border-color: transparent;
+}
+
+.btn-ghost:hover:not(:disabled) {
+    background: var(--primary-bg);
+}
+
+/* Sizes */
+.btn-sm {
+    padding: 0.4rem 1rem;
+    font-size: 0.8125rem;
+}
+
+.btn-lg {
+    padding: 0.9rem 2.25rem;
+    font-size: 1rem;
+}
+
+.btn-full-width {
+    width: 100%;
+}
