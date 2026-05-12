@@ -41,7 +41,7 @@ class ErrorBoundary extends React.Component {
                         ⚠️
                     </div>
                     <h1 style={{ fontSize: '1.5rem', color: '#1A1A2E', marginBottom: '0.5rem' }}>
-                        Something went wrong
+                        Oops! Something went wrong with the interface
                     </h1>
                     <p style={{ color: '#6B7280', marginBottom: '1.5rem', maxWidth: '400px' }}>
                         We're sorry, an unexpected error occurred. Please try refreshing the page.
@@ -60,7 +60,7 @@ class ErrorBoundary extends React.Component {
                             fontFamily: 'inherit'
                         }}
                     >
-                        Refresh Page
+                        Reload Page
                     </button>
                 </div>
             );

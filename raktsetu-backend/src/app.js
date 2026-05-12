@@ -2,16 +2,51 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
+// Route Imports
+import authRoutes from './routes/authRoutes.js';
+import bloodRequestRoutes from './routes/bloodRequestRoutes.js';
+import matchingRoutes from './routes/matchingRoutes.js';
+import notificationRoutes from './routes/notificationRoutes.js';
+import bloodBankRoutes from './routes/bloodBankRoutes.js';
+
+// Middleware Imports
+import { notFound, globalErrorHandler } from './middleware/errorMiddleware.js';
+import { authRateLimiter, apiRateLimiter } from './middleware/rateLimiter.js';
+
 const app = express();
-
-// Middleware
+// 1. Security & Core Middleware
 app.use(helmet());
-app.use(cors());
-app.use(express.json());
 
-// Health Check Route
+// CORS: environment-driven origins with localhost fallbacks for development
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
+  : ['http://localhost:5173', 'http://localhost:5174'];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+app.use(express.json()); // Parses incoming JSON payloads
+
+// 2. API Health Check
 app.get('/api/v1/health', (req, res) => {
-  res.json({ status: 'ok' });
+  res.status(200).json({
+    success: true,
+    message: 'RaktSetu API is running'
+  });
 });
+
+// 3. API Routes
+app.use('/api/v1/auth', authRateLimiter, authRoutes);
+app.use('/api/v1/blood-requests', apiRateLimiter, bloodRequestRoutes);
+app.use('/api/v1', apiRateLimiter, matchingRoutes);
+app.use('/api/v1/notifications', apiRateLimiter, notificationRoutes);
+app.use('/api/v1/blood-banks', apiRateLimiter, bloodBankRoutes);
+
+// 4. 404 Route Handler
+app.use(notFound);
+
+// 5. Global Error Handler (MUST BE LAST)
+app.use(globalErrorHandler);
 
 export default app;

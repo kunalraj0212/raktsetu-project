@@ -9,14 +9,14 @@ import useForm from '../hooks/useForm';
 import { createEmergencyRequest } from '../services/bloodBankService';
 import './EmergencyRequest.css';
 
-const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+import { phoneRegex, bloodGroups } from '../utils/validators';
 
 const EmergencyRequest = () => {
     const initialValues = {
         patientName: '', bloodGroup: '', unitsNeeded: '1',
         hospital: '', city: '', state: '',
         contactName: '', contactPhone: '',
-        urgency: 'critical', notes: ''
+        urgency: 'critical', requiredBy: '', notes: ''
     };
     const [request, setRequest] = useState(null);
 
@@ -25,11 +25,12 @@ const EmergencyRequest = () => {
         if (!data.patientName.trim()) err.patientName = 'Patient name is required';
         if (!data.bloodGroup) err.bloodGroup = 'Select blood group';
         if (!data.unitsNeeded || Number(data.unitsNeeded) < 1) err.unitsNeeded = 'At least 1 unit required';
+        if (!data.requiredBy) err.requiredBy = 'Required-by date is needed';
         if (!data.hospital.trim()) err.hospital = 'Hospital name is required';
-        if (!data.city.trim()) err.city = 'City is required';
+        if (!data.city.trim()) err.city = 'City/District is required';
         if (!data.contactName.trim()) err.contactName = 'Contact name is required';
         if (!data.contactPhone.trim()) err.contactPhone = 'Phone number is required';
-        else if (!/^[6-9]\d{9}$/.test(data.contactPhone.replace(/\s/g, '')))
+        else if (!phoneRegex.test(data.contactPhone.replace(/\s/g, '')))
             err.contactPhone = 'Enter a valid 10-digit Indian phone number';
         return err;
     };
@@ -38,7 +39,6 @@ const EmergencyRequest = () => {
         initialValues,
         validate,
         onSubmit: async (data) => {
-            await new Promise(r => setTimeout(r, 2000));
             const result = await createEmergencyRequest(data);
             setRequest(result);
         }
@@ -61,7 +61,7 @@ const EmergencyRequest = () => {
                             <h2>Emergency Alert Sent!</h2>
                             <p className="em-success-sub">Your request has been broadcasted to all compatible donors<br /> and blood banks in <strong>{formData.city}</strong>.</p>
                             <div className="em-request-details">
-                                <div><span>Request ID</span><strong>{request.id}</strong></div>
+                                <div><span>Request ID</span><strong>{request._id}</strong></div>
                                 <div><span>Blood Group</span><strong className="text-danger">{formData.bloodGroup}</strong></div>
                                 <div><span>Units</span><strong>{formData.unitsNeeded}</strong></div>
                                 <div><span>Status</span><strong className="text-amber">Broadcasting...</strong></div>
@@ -106,10 +106,10 @@ const EmergencyRequest = () => {
                         <div className="em-urgency-selector">
                             <label>Urgency Level</label>
                             <div className="urgency-options">
-                                {['critical', 'urgent', 'standard'].map(level => (
-                                    <label key={level} className={`urgency-opt ${formData.urgency === level ? 'active' : ''} urgency-${level}`}>
-                                        <input type="radio" name="urgency" value={level} checked={formData.urgency === level} onChange={handleChange} />
-                                        <span>{level.charAt(0).toUpperCase() + level.slice(1)}</span>
+                                {[{ value: 'critical', label: 'Critical' }, { value: 'high', label: 'High' }, { value: 'medium', label: 'Medium' }, { value: 'low', label: 'Low' }].map(level => (
+                                    <label key={level.value} className={`urgency-opt ${formData.urgency === level.value ? 'active' : ''} urgency-${level.value}`}>
+                                        <input type="radio" name="urgency" value={level.value} checked={formData.urgency === level.value} onChange={handleChange} />
+                                        <span>{level.label}</span>
                                     </label>
                                 ))}
                             </div>
@@ -136,6 +136,11 @@ const EmergencyRequest = () => {
                                     <input id="em-units" type="number" name="unitsNeeded" value={formData.unitsNeeded} onChange={handleChange} className={errors.unitsNeeded ? 'error' : ''} min="1" max="20" />
                                     {errors.unitsNeeded && <span className="field-error">{errors.unitsNeeded}</span>}
                                 </div>
+                                <div className="form-group">
+                                    <label htmlFor="em-requiredby">Required By (Date) *</label>
+                                    <input id="em-requiredby" type="date" name="requiredBy" value={formData.requiredBy} onChange={handleChange} className={errors.requiredBy ? 'error' : ''} min={new Date().toISOString().split('T')[0]} />
+                                    {errors.requiredBy && <span className="field-error">{errors.requiredBy}</span>}
+                                </div>
                             </div>
                         </div>
 
@@ -148,7 +153,7 @@ const EmergencyRequest = () => {
                                     {errors.hospital && <span className="field-error">{errors.hospital}</span>}
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="em-city">City *</label>
+                                    <label htmlFor="em-city">City / District *</label>
                                     <input id="em-city" type="text" name="city" value={formData.city} onChange={handleChange} className={errors.city ? 'error' : ''} placeholder="e.g., Mumbai" />
                                     {errors.city && <span className="field-error">{errors.city}</span>}
                                 </div>

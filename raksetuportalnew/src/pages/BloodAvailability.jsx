@@ -17,18 +17,28 @@ const BloodAvailability = () => {
     const [bankCount, setBankCount] = useState(0);
     const [states, setStates] = useState([]);
     const [districts, setDistricts] = useState([]);
+    const [error, setError] = useState(null);
     const perPage = 8;
 
     useEffect(() => {
         let isMounted = true;
         (async () => {
-            const [nextStates, nextBankCount] = await Promise.all([
-                fetchStates(),
-                fetchBloodBankCount(),
-            ]);
-            if (!isMounted) return;
-            setStates(nextStates);
-            setBankCount(nextBankCount);
+            try {
+                const [nextStates, nextBankCount] = await Promise.all([
+                    fetchStates(),
+                    fetchBloodBankCount(),
+                ]);
+                if (!isMounted) return;
+                setStates(nextStates);
+                setBankCount(nextBankCount);
+                setError(null);
+            } catch (err) {
+                if (isMounted) {
+                    setError('Failed to load initial data. Please try again later.');
+                    setStates([]);
+                    setBankCount(0);
+                }
+            }
         })();
         return () => { isMounted = false; };
     }, []);
@@ -40,9 +50,14 @@ const BloodAvailability = () => {
                 if (isMounted) setDistricts([]);
                 return;
             }
-            const nextDistricts = await fetchDistricts(filters.state);
-            if (!isMounted) return;
-            setDistricts(nextDistricts);
+            try {
+                const nextDistricts = await fetchDistricts(filters.state);
+                if (!isMounted) return;
+                setDistricts(nextDistricts);
+            } catch (err) {
+                console.error('Failed to fetch districts:', err);
+                if (isMounted) setDistricts([]);
+            }
         })();
         return () => { isMounted = false; };
     }, [filters.state]);
@@ -58,16 +73,24 @@ const BloodAvailability = () => {
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        const searchResults = await searchBloodAvailability(filters);
-        setResults(searchResults);
-        setHasSearched(true);
-        setCurrentPage(1);
+        try {
+            setError(null);
+            const searchResults = await searchBloodAvailability(filters);
+            setResults(searchResults);
+            setHasSearched(true);
+            setCurrentPage(1);
+        } catch (err) {
+            setError(err.message || 'Failed to search blood availability.');
+            setResults([]);
+            setHasSearched(false);
+        }
     };
 
     const handleClear = () => {
         setFilters({ state: '', district: '', bloodGroup: 'All', component: '' });
         setResults([]);
         setHasSearched(false);
+        setError(null);
     };
 
     const totalPages = Math.ceil(results.length / perPage);
@@ -84,6 +107,11 @@ const BloodAvailability = () => {
 
             <section className="section">
                 <div className="container">
+                    {error && (
+                        <div style={{ color: '#8B0000', backgroundColor: '#FEE2E2', padding: '1rem', borderRadius: '0.375rem', marginBottom: '1.5rem', textAlign: 'center', fontWeight: '500', border: '1px solid #FCA5A5' }}>
+                            ⚠️ {error}
+                        </div>
+                    )}
                     <form className="ba-search-form" onSubmit={handleSearch}>
                         <div className="ba-filters-grid">
                             <div className="ba-filter-group">

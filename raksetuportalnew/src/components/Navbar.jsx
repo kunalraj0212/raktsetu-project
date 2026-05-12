@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Droplet, Search, ChevronDown, Menu, X } from 'lucide-react';
+import { Droplet, Search, ChevronDown, Menu, X, LogOut, User as UserIcon } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -8,6 +9,7 @@ const Navbar = () => {
     const [activeDropdown, setActiveDropdown] = useState(null);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
+    const { user, logout } = useAuth();
 
     const navItems = [
         { label: 'Home', path: '/' },
@@ -79,14 +81,32 @@ const Navbar = () => {
                             <span className="brand-tagline">Connecting Lives Through Blood</span>
                         </div>
                     </Link>
-                    <div className="header-search">
-                        <Search size={16} className="search-icon" />
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            className="search-input"
-                            aria-label="Search the site"
-                        />
+                    <div className="header-actions" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                        <div className="header-search" style={{ marginRight: '1rem' }}>
+                            <Search size={16} className="search-icon" />
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                className="search-input"
+                                aria-label="Search the site"
+                            />
+                        </div>
+                        {user ? (
+                            <div className="user-profile" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '500', color: '#1f2937' }}>
+                                    <UserIcon size={18} />
+                                    <span>{user.fullName || 'User'}</span>
+                                </div>
+                                <button onClick={() => { logout(); navigate('/'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', background: 'none', border: '1px solid #e5e7eb', padding: '0.4rem 0.75rem', borderRadius: '4px', cursor: 'pointer', color: '#4b5563', fontSize: '0.875rem' }}>
+                                    <LogOut size={14} />
+                                    Logout
+                                </button>
+                            </div>
+                        ) : (
+                            <Link to="/login" style={{ backgroundColor: '#8B0000', color: 'white', padding: '0.5rem 1rem', borderRadius: '4px', textDecoration: 'none', fontWeight: '500', fontSize: '0.9rem' }}>
+                                Login
+                            </Link>
+                        )}
                     </div>
                 </div>
             </div>

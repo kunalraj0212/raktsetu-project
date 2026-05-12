@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary';
 import Layout from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Lazy load all pages for code splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -12,6 +13,7 @@ const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const BloodAvailability = lazy(() => import('./pages/BloodAvailability'));
 const DonorRegistration = lazy(() => import('./pages/DonorRegistration'));
+const Login = lazy(() => import('./pages/Login'));
 const EmergencyRequest = lazy(() => import('./pages/EmergencyRequest'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Terms = lazy(() => import('./pages/Terms'));
@@ -40,29 +42,34 @@ const PageLoader = () => (
   </div>
 );
 
+import { AuthProvider } from './context/AuthContext';
+
 function App() {
   return (
     <ErrorBoundary>
-      <Router>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="features" element={<Features />} />
-              <Route path="how-it-works" element={<HowItWorks />} />
-              <Route path="blood-banks" element={<ForBloodBanks />} />
-              <Route path="about" element={<About />} />
-              <Route path="contact" element={<Contact />} />
-              <Route path="blood-availability" element={<BloodAvailability />} />
-              <Route path="register-donor" element={<DonorRegistration />} />
-              <Route path="emergency" element={<EmergencyRequest />} />
-              <Route path="privacy" element={<PrivacyPolicy />} />
-              <Route path="terms" element={<Terms />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </Suspense>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="features" element={<Features />} />
+                <Route path="how-it-works" element={<HowItWorks />} />
+                <Route path="blood-banks" element={<ForBloodBanks />} />
+                <Route path="about" element={<About />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="blood-availability" element={<BloodAvailability />} />
+                <Route path="register-donor" element={<DonorRegistration />} />
+                <Route path="login" element={<Login />} />
+                <Route path="emergency" element={<ProtectedRoute><EmergencyRequest /></ProtectedRoute>} />
+                <Route path="privacy" element={<PrivacyPolicy />} />
+                <Route path="terms" element={<Terms />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </Router>
+      </AuthProvider>
     </ErrorBoundary>
   );
 }

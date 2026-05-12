@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, Navigate } from 'react-router-dom';
 import {
     Heart, User, Mail, Phone, MapPin, Calendar, Droplets,
     CheckCircle, ArrowLeft, ShieldCheck
 } from 'lucide-react';
 import Button from '../components/Button';
 import useForm from '../hooks/useForm';
-import { createDonor } from '../services/bloodBankService';
+import { useAuth } from '../context/AuthContext';
 import './DonorRegistration.css';
 
-const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+import { phoneRegex, bloodGroups } from '../utils/validators';
 
 const DonorRegistration = () => {
+    const location = useLocation();
+    
+    // If user arrived here without going through OTP verification first, redirect to login/onboarding
+    const verifiedPhone = location.state?.phone;
+    const isVerified = location.state?.verified;
+
     const initialValues = {
-        fullName: '', email: '', phone: '', dob: '', gender: '',
+        fullName: '', email: '', phone: verifiedPhone || '', dob: '', gender: '',
         bloodGroup: '', state: '', district: '', address: '',
         weight: '', lastDonation: '', medicalConditions: '',
-        agreeTerms: false
+        password: '', agreeTerms: false
     };
     const [registeredDonor, setRegisteredDonor] = useState(null);
+    const { registerProfile } = useAuth();
 
     const validate = (data) => {
         const err = {};
         if (!data.fullName.trim()) err.fullName = 'Full name is required';
-        if (!data.email.trim()) err.email = 'Email is required';
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) err.email = 'Invalid email format';
+        if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) err.email = 'Invalid email format';
         if (!data.phone.trim()) err.phone = 'Phone number is required';
-        else if (!/^[6-9]\d{9}$/.test(data.phone.replace(/\s/g, '')))
+        else if (!phoneRegex.test(data.phone.replace(/\s/g, '')))
             err.phone = 'Enter a valid 10-digit Indian phone number';
         if (!data.dob) err.dob = 'Date of birth is required';
         else {
@@ -47,11 +53,10 @@ const DonorRegistration = () => {
         initialValues,
         validate,
         onSubmit: async (data) => {
-            await new Promise(r => setTimeout(r, 1500));
-            const donor = await createDonor({
+            const donor = await registerProfile({
                 fullName: data.fullName,
-                email: data.email,
-                phone: data.phone,
+                email: data.email || '',
+                phone: verifiedPhone, // Guaranteed verified
                 dob: data.dob,
                 gender: data.gender,
                 bloodGroup: data.bloodGroup,
@@ -60,7 +65,7 @@ const DonorRegistration = () => {
                 address: data.address,
                 weight: data.weight,
                 lastDonation: data.lastDonation,
-                medicalConditions: data.medicalConditions,
+                medicalConditions: data.medicalConditions
             });
             setRegisteredDonor(donor);
         },
@@ -86,7 +91,7 @@ const DonorRegistration = () => {
                             <div className="dr-success-details">
                                 <div className="dr-detail">
                                     <span>Donor ID</span>
-                                    <strong>{registeredDonor.id}</strong>
+                                    <strong>{registeredDonor._id}</strong>
                                 </div>
                                 <div className="dr-detail">
                                     <span>Blood Group</span>
@@ -107,6 +112,10 @@ const DonorRegistration = () => {
                 </section>
             </div>
         );
+    }
+
+    if (!isVerified || !verifiedPhone) {
+        return <Navigate to="/login" replace />;
     }
 
     return (
@@ -130,14 +139,13 @@ const DonorRegistration = () => {
                                     {errors.fullName && <span className="field-error">{errors.fullName}</span>}
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="dr-email">Email Address *</label>
+                                    <label htmlFor="dr-email">Email Address (Optional)</label>
                                     <input id="dr-email" type="email" name="email" value={formData.email} onChange={handleChange} className={errors.email ? 'error' : ''} placeholder="your@email.com" />
                                     {errors.email && <span className="field-error">{errors.email}</span>}
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="dr-phone">Phone Number *</label>
-                                    <input id="dr-phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} className={errors.phone ? 'error' : ''} placeholder="10-digit mobile number" />
-                                    {errors.phone && <span className="field-error">{errors.phone}</span>}
+                                    <label htmlFor="dr-phone">Phone Number (Verified) ✓</label>
+                                    <input id="dr-phone" type="tel" name="phone" value={formData.phone} disabled className="disabled-input" style={{ backgroundColor: '#f3f4f6', color: '#6b7280', cursor: 'not-allowed' }} />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="dr-dob">Date of Birth *</label>
@@ -210,6 +218,12 @@ const DonorRegistration = () => {
                             </label>
                             {errors.agreeTerms && <span className="field-error">{errors.agreeTerms}</span>}
                         </div>
+
+                        {errors.form && (
+                            <div className="form-global-error" style={{ color: '#8B0000', backgroundColor: '#FEE2E2', padding: '1rem', borderRadius: '0.375rem', marginBottom: '1rem', textAlign: 'center', fontWeight: '500', border: '1px solid #FCA5A5' }}>
+                                ⚠️ {errors.form}
+                            </div>
+                        )}
 
                         <Button type="submit" variant="primary" className="btn-full-width btn-lg" disabled={submitState === 'submitting'}>
                             {submitState === 'submitting' ? 'Registering...' : <><Heart size={18} /> Register as Donor</>}

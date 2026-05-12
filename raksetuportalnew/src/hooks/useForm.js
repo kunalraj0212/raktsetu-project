@@ -31,12 +31,17 @@ export const useForm = ({ initialValues, validate, onSubmit }) => {
       setErrors(validationErrors);
       return;
     }
+    setErrors((prev) => {
+      const newErrors = { ...prev };
+      delete newErrors.form;
+      return newErrors;
+    });
     setSubmitState('submitting');
     try {
       if (onSubmit) await onSubmit(formData);
       setSubmitState('success');
     } catch (err) {
-      setErrors({ _form: err.message || 'Submission failed' });
+      setErrors((prev) => ({ ...prev, form: err.message || 'Submission failed' }));
       setSubmitState('error');
     }
   }, [formData, validate, onSubmit]);
