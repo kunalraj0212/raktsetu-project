@@ -12,7 +12,8 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      sparse: true, // Allows multiple null values
+      required: [true, 'Email is required'],
+      unique: true,
       lowercase: true,
       trim: true,
       match: [
@@ -22,6 +23,7 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
+      required: [true, 'Password is required'],
       minlength: [8, 'Password must be at least 8 characters long'],
       select: false, // Security: Prevents password leak in query results
     },

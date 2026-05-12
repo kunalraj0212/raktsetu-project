@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useLocation, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
-    Heart, User, Mail, Phone, MapPin, Calendar, Droplets,
-    CheckCircle, ArrowLeft, ShieldCheck
+    Heart, User, MapPin, Calendar, Droplets,
+    CheckCircle, ShieldCheck
 } from 'lucide-react';
 import Button from '../components/Button';
 import useForm from '../hooks/useForm';
@@ -12,28 +12,31 @@ import './DonorRegistration.css';
 import { phoneRegex, bloodGroups } from '../utils/validators';
 
 const DonorRegistration = () => {
-    const location = useLocation();
+    const navigate = useNavigate();
     
-    // If user arrived here without going through OTP verification first, redirect to login/onboarding
-    const verifiedPhone = location.state?.phone;
-    const isVerified = location.state?.verified;
-
     const initialValues = {
-        fullName: '', email: '', phone: verifiedPhone || '', dob: '', gender: '',
+        fullName: '', email: '', phone: '', dob: '', gender: '',
         bloodGroup: '', state: '', district: '', address: '',
         weight: '', lastDonation: '', medicalConditions: '',
         password: '', agreeTerms: false
     };
     const [registeredDonor, setRegisteredDonor] = useState(null);
-    const { registerProfile } = useAuth();
+    const { register } = useAuth();
 
     const validate = (data) => {
         const err = {};
         if (!data.fullName.trim()) err.fullName = 'Full name is required';
-        if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) err.email = 'Invalid email format';
+        
+        if (!data.email.trim()) err.email = 'Email is required';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) err.email = 'Invalid email format';
+        
+        if (!data.password) err.password = 'Password is required';
+        else if (data.password.length < 8) err.password = 'Password must be at least 8 characters long';
+        
         if (!data.phone.trim()) err.phone = 'Phone number is required';
         else if (!phoneRegex.test(data.phone.replace(/\s/g, '')))
             err.phone = 'Enter a valid 10-digit Indian phone number';
+            
         if (!data.dob) err.dob = 'Date of birth is required';
         else {
             const age = (new Date() - new Date(data.dob)) / (365.25 * 24 * 60 * 60 * 1000);
@@ -43,6 +46,7 @@ const DonorRegistration = () => {
         if (!data.gender) err.gender = 'Please select gender';
         if (!data.bloodGroup) err.bloodGroup = 'Please select blood group';
         if (!data.state.trim()) err.state = 'State is required';
+        if (!data.district.trim()) err.district = 'District is required';
         if (!data.weight) err.weight = 'Weight is required';
         else if (Number(data.weight) < 45) err.weight = 'Minimum weight for donors is 45 kg';
         if (!data.agreeTerms) err.agreeTerms = 'You must agree to the terms';
@@ -53,10 +57,11 @@ const DonorRegistration = () => {
         initialValues,
         validate,
         onSubmit: async (data) => {
-            const donor = await registerProfile({
+            const donor = await register({
                 fullName: data.fullName,
-                email: data.email || '',
-                phone: verifiedPhone, // Guaranteed verified
+                email: data.email,
+                password: data.password,
+                phone: data.phone,
                 dob: data.dob,
                 gender: data.gender,
                 bloodGroup: data.bloodGroup,
@@ -102,7 +107,7 @@ const DonorRegistration = () => {
                                     <strong className="status-active">Active ✓</strong>
                                 </div>
                             </div>
-                            <p className="dr-success-note">You'll be notified when there's a blood request matching your blood group in your area.</p>
+                            <p className="dr-success-note">You are now logged in and can access all features.</p>
                             <div className="dr-success-actions">
                                 <Link to="/"><Button variant="primary">Go to Home</Button></Link>
                                 <Link to="/blood-availability"><Button variant="secondary">Search Blood</Button></Link>
@@ -112,10 +117,6 @@ const DonorRegistration = () => {
                 </section>
             </div>
         );
-    }
-
-    if (!isVerified || !verifiedPhone) {
-        return <Navigate to="/login" replace />;
     }
 
     return (
@@ -131,22 +132,37 @@ const DonorRegistration = () => {
                 <div className="container dr-grid">
                     <form className="dr-form" onSubmit={handleSubmit} noValidate>
                         <div className="dr-form-section">
-                            <h3><User size={18} /> Personal Information</h3>
+                            <h3><User size={18} /> Account Information</h3>
                             <div className="dr-fields-grid">
-                                <div className="form-group">
+                                <div className="form-group full-width">
                                     <label htmlFor="dr-name">Full Name *</label>
                                     <input id="dr-name" type="text" name="fullName" value={formData.fullName} onChange={handleChange} className={errors.fullName ? 'error' : ''} placeholder="Enter your full name" />
                                     {errors.fullName && <span className="field-error">{errors.fullName}</span>}
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="dr-email">Email Address (Optional)</label>
+                                    <label htmlFor="dr-email">Email Address *</label>
                                     <input id="dr-email" type="email" name="email" value={formData.email} onChange={handleChange} className={errors.email ? 'error' : ''} placeholder="your@email.com" />
                                     {errors.email && <span className="field-error">{errors.email}</span>}
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="dr-phone">Phone Number (Verified) ✓</label>
-                                    <input id="dr-phone" type="tel" name="phone" value={formData.phone} disabled className="disabled-input" style={{ backgroundColor: '#f3f4f6', color: '#6b7280', cursor: 'not-allowed' }} />
+                                    <label htmlFor="dr-password">Password *</label>
+                                    <input id="dr-password" type="password" name="password" value={formData.password} onChange={handleChange} className={errors.password ? 'error' : ''} placeholder="Minimum 8 characters" />
+                                    {errors.password && <span className="field-error">{errors.password}</span>}
                                 </div>
+                                <div className="form-group">
+                                    <label htmlFor="dr-phone">Phone Number *</label>
+                                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                        <span style={{ padding: '0.75rem', backgroundColor: '#f3f4f6', border: '1px solid #d1d5db', borderRadius: '4px', color: '#4b5563' }}>+91</span>
+                                        <input id="dr-phone" type="tel" name="phone" value={formData.phone} onChange={(e) => handleChange({ target: { name: 'phone', value: e.target.value.replace(/\D/g, '').slice(0, 10) } })} className={errors.phone ? 'error' : ''} placeholder="10-digit mobile number" style={{ flex: 1 }} />
+                                    </div>
+                                    {errors.phone && <span className="field-error">{errors.phone}</span>}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="dr-form-section">
+                            <h3><User size={18} /> Personal Details</h3>
+                            <div className="dr-fields-grid">
                                 <div className="form-group">
                                     <label htmlFor="dr-dob">Date of Birth *</label>
                                     <input id="dr-dob" type="date" name="dob" value={formData.dob} onChange={handleChange} className={errors.dob ? 'error' : ''} />
@@ -201,8 +217,9 @@ const DonorRegistration = () => {
                                     {errors.state && <span className="field-error">{errors.state}</span>}
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="dr-district">District</label>
-                                    <input id="dr-district" type="text" name="district" value={formData.district} onChange={handleChange} placeholder="Enter your district" />
+                                    <label htmlFor="dr-district">District *</label>
+                                    <input id="dr-district" type="text" name="district" value={formData.district} onChange={handleChange} className={errors.district ? 'error' : ''} placeholder="Enter your district" />
+                                    {errors.district && <span className="field-error">{errors.district}</span>}
                                 </div>
                                 <div className="form-group full-width">
                                     <label htmlFor="dr-address">Full Address</label>
@@ -228,6 +245,10 @@ const DonorRegistration = () => {
                         <Button type="submit" variant="primary" className="btn-full-width btn-lg" disabled={submitState === 'submitting'}>
                             {submitState === 'submitting' ? 'Registering...' : <><Heart size={18} /> Register as Donor</>}
                         </Button>
+                        
+                        <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.9rem' }}>
+                            Already have an account? <Link to="/login" style={{ color: '#8B0000', fontWeight: 'bold' }}>Log in</Link>
+                        </div>
                     </form>
 
                     <div className="dr-sidebar">

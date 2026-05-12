@@ -1,62 +1,34 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { sendOtp, loginWithOtp } = useAuth();
+    const { login } = useAuth();
     
-    const [step, setStep] = useState(1);
-    const [phone, setPhone] = useState('');
-    const [otp, setOtp] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handlePhoneSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
         
-        if (!/^[0-9]{10}$/.test(phone)) {
-            setError('Please enter a valid 10-digit phone number');
+        if (!email || !password) {
+            setError('Please enter both email and password');
             return;
         }
 
         setIsLoading(true);
         try {
-            await sendOtp(phone);
-            setStep(2);
+            await login(email, password);
+            const origin = location.state?.from?.pathname || '/';
+            navigate(origin);
         } catch (err) {
-            setError(err.message || 'Failed to send OTP. Please try again.');
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleOtpSubmit = async (e) => {
-        e.preventDefault();
-        setError(null);
-
-        if (otp.length !== 6) {
-            setError('Please enter the 6-digit OTP');
-            return;
-        }
-
-        setIsLoading(true);
-        try {
-            const data = await loginWithOtp(phone, otp);
-            
-            if (data.isNewUser) {
-                // Navigate to profile completion page, passing the verified phone
-                navigate('/register-donor', { state: { phone, verified: true } });
-            } else {
-                // Existing user logged in
-                const origin = location.state?.from?.pathname || '/';
-                navigate(origin);
-            }
-        } catch (err) {
-            setError(err.message || 'Invalid OTP. Please try again.');
+            setError(err.response?.data?.message || err.message || 'Invalid email or password. Please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -66,8 +38,8 @@ const Login = () => {
         <div className="login-page">
             <div className="login-card">
                 <div className="login-header">
-                    <h1>{step === 1 ? 'Welcome' : 'Verify Phone'}</h1>
-                    <p>{step === 1 ? 'Log in or sign up with your mobile number' : `Enter the 6-digit OTP sent to +91 ${phone}`}</p>
+                    <h1>Welcome Back</h1>
+                    <p>Log in to your account</p>
                 </div>
 
                 {error && (
@@ -76,58 +48,38 @@ const Login = () => {
                     </div>
                 )}
 
-                {step === 1 ? (
-                    <form className="login-form" onSubmit={handlePhoneSubmit} noValidate>
-                        <div className="form-group">
-                            <label htmlFor="phone">Phone Number</label>
-                            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                <span style={{ padding: '0.75rem', backgroundColor: '#f3f4f6', border: '1px solid #d1d5db', borderRadius: '4px', color: '#4b5563' }}>+91</span>
-                                <input
-                                    id="phone"
-                                    type="tel"
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
-                                    placeholder="10-digit mobile number"
-                                    style={{ flex: 1 }}
-                                    autoFocus
-                                />
-                            </div>
-                        </div>
+                <form className="login-form" onSubmit={handleSubmit} noValidate>
+                    <div className="form-group">
+                        <label htmlFor="email">Email Address</label>
+                        <input
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="your.email@example.com"
+                            autoFocus
+                        />
+                    </div>
 
-                        <button type="submit" className="login-btn" disabled={isLoading || phone.length !== 10}>
-                            {isLoading ? 'Sending OTP...' : 'Send OTP'}
-                        </button>
-                    </form>
-                ) : (
-                    <form className="login-form" onSubmit={handleOtpSubmit} noValidate>
-                        <div className="form-group">
-                            <label htmlFor="otp">One Time Password</label>
-                            <input
-                                id="otp"
-                                type="text"
-                                value={otp}
-                                onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                                placeholder="Enter 6-digit OTP"
-                                style={{ letterSpacing: '0.5em', textAlign: 'center', fontSize: '1.25rem', fontWeight: 'bold' }}
-                                autoFocus
-                            />
-                        </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Enter your password"
+                        />
+                    </div>
 
-                        <button type="submit" className="login-btn" disabled={isLoading || otp.length !== 6}>
-                            {isLoading ? 'Verifying...' : 'Verify OTP'}
-                        </button>
+                    <button type="submit" className="login-btn" disabled={isLoading || !email || !password}>
+                        {isLoading ? 'Logging in...' : 'Login'}
+                    </button>
 
-                        <div style={{ marginTop: '1rem', textAlign: 'center' }}>
-                            <button 
-                                type="button" 
-                                onClick={() => { setStep(1); setOtp(''); setError(null); }}
-                                style={{ background: 'none', border: 'none', color: '#8B0000', cursor: 'pointer', fontSize: '0.9rem', textDecoration: 'underline' }}
-                            >
-                                Change Phone Number
-                            </button>
-                        </div>
-                    </form>
-                )}
+                    <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.9rem' }}>
+                        Don't have an account? <Link to="/register-donor" style={{ color: '#8B0000', fontWeight: 'bold' }}>Sign up</Link>
+                    </div>
+                </form>
             </div>
         </div>
     );

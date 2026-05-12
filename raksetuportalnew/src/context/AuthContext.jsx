@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { getCurrentUser, sendOtp, verifyOtp, completeProfile, logoutUser } from '../services/authService';
+import { getCurrentUser, loginUser, registerUser, logoutUser } from '../services/authService';
 
 const AuthContext = createContext();
 
@@ -24,16 +24,14 @@ export const AuthProvider = ({ children }) => {
         initAuth();
     }, []);
 
-    const loginWithOtp = async (phone, otp) => {
-        const data = await verifyOtp(phone, otp);
-        if (!data.isNewUser) {
-            setUser(data.user);
-        }
+    const login = async (email, password) => {
+        const data = await loginUser(email, password);
+        setUser(data);
         return data;
     };
 
-    const registerProfile = async (userData) => {
-        const data = await completeProfile(userData);
+    const register = async (userData) => {
+        const data = await registerUser(userData);
         setUser(data);
         return data;
     };
@@ -44,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, sendOtp, loginWithOtp, registerProfile, logout }}>
+        <AuthContext.Provider value={{ user, loading, login, register, logout }}>
             {children}
         </AuthContext.Provider>
     );
