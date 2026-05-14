@@ -109,7 +109,7 @@ export const getStats = async () => {
     return {
         totalBanks: data.totalBanks || 0,
         totalUnits: data.totalUnits || 0,
-        totalStates: data.totalStates || Object.keys(data.bloodGroupBreakdown || {}).length || 15,
+        totalStates: data.totalStates || 29,
         groupTotals: data.bloodGroupBreakdown || {},
     };
 };

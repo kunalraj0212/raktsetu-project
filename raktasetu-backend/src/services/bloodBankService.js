@@ -22,6 +22,8 @@ export const searchBloodBanks = async ({ state, district, bloodGroup, name }) =>
 
 export const getBloodBankStats = async () => {
   const totalBanks = await BloodBank.countDocuments();
+  const statesCovered = await BloodBank.distinct('state');
+  const totalStates = statesCovered.length;
 
   const aggregateStats = await BloodBank.aggregate([
     {
@@ -51,6 +53,7 @@ export const getBloodBankStats = async () => {
   return {
     totalBanks,
     totalUnits,
+    totalStates,
     bloodGroupBreakdown,
   };
 };

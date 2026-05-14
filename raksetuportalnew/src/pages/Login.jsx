@@ -76,8 +76,9 @@ const Login = () => {
                         {isLoading ? 'Logging in...' : 'Login'}
                     </button>
 
-                    <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.9rem' }}>
-                        Don't have an account? <Link to="/register-donor" style={{ color: '#8B0000', fontWeight: 'bold' }}>Sign up</Link>
+                    <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.9rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        <div>Don't have an account? <Link to="/register-donor" style={{ color: '#8B0000', fontWeight: 'bold' }}>Sign up as Donor</Link></div>
+                        <div>Are you a hospital? <Link to="/register-bloodbank" style={{ color: '#1e3a8a', fontWeight: 'bold' }}>Register as Blood Bank</Link></div>
                     </div>
                 </form>
             </div>

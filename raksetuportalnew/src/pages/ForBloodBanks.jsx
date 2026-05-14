@@ -58,7 +58,7 @@ const ForBloodBanks = () => {
                             <li><CheckCircle size={16} className="check-green" /> Dedicated onboarding support</li>
                             <li><CheckCircle size={16} className="check-green" /> Free for government blood banks</li>
                         </ul>
-                        <Link to="/contact">
+                        <Link to="/register-bloodbank">
                             <Button variant="primary">Register Your Blood Bank</Button>
                         </Link>
                     </div>

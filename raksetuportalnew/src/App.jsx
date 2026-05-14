@@ -13,6 +13,7 @@ const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const BloodAvailability = lazy(() => import('./pages/BloodAvailability'));
 const DonorRegistration = lazy(() => import('./pages/DonorRegistration'));
+const BloodBankRegistration = lazy(() => import('./pages/BloodBankRegistration'));
 const Login = lazy(() => import('./pages/Login'));
 const EmergencyRequest = lazy(() => import('./pages/EmergencyRequest'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
@@ -60,6 +61,7 @@ function App() {
                 <Route path="contact" element={<Contact />} />
                 <Route path="blood-availability" element={<BloodAvailability />} />
                 <Route path="register-donor" element={<DonorRegistration />} />
+                <Route path="register-bloodbank" element={<BloodBankRegistration />} />
                 <Route path="login" element={<Login />} />
                 <Route path="emergency" element={<ProtectedRoute><EmergencyRequest /></ProtectedRoute>} />
                 <Route path="privacy" element={<PrivacyPolicy />} />
