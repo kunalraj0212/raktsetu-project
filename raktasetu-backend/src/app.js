@@ -17,15 +17,30 @@ const app = express();
 // 1. Security & Core Middleware
 app.use(helmet());
 
-// CORS: environment-driven origins with localhost fallbacks for development
-const allowedOrigins = process.env.CORS_ORIGIN
-  ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
-  : ['http://localhost:5173', 'http://localhost:5174'];
+// CORS: environment-driven origins with localhost fallbacks and Vercel preview support
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = process.env.CORS_ORIGIN
+      ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
+      : ['http://localhost:5173', 'http://localhost:5174'];
+      
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+    
+    // Allow any Vercel preview deployment
+    if (origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
 
-app.use(cors({
-  origin: allowedOrigins,
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
-}));
+};
+
+app.use(cors(corsOptions));
 app.use(express.json()); // Parses incoming JSON payloads
 
 // 2. API Health Check
