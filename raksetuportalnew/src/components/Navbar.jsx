@@ -103,9 +103,14 @@ const Navbar = () => {
                                 </button>
                             </div>
                         ) : (
-                            <Link to="/login" style={{ backgroundColor: '#8B0000', color: 'white', padding: '0.5rem 1rem', borderRadius: '4px', textDecoration: 'none', fontWeight: '500', fontSize: '0.9rem' }}>
-                                Login
-                            </Link>
+                            <div style={{ display: 'flex', gap: '0.75rem' }}>
+                                <Link to="/register-bloodbank" style={{ backgroundColor: '#1e3a8a', color: 'white', padding: '0.5rem 1rem', borderRadius: '4px', textDecoration: 'none', fontWeight: '500', fontSize: '0.9rem' }}>
+                                    Blood Bank Login
+                                </Link>
+                                <Link to="/login" style={{ backgroundColor: '#8B0000', color: 'white', padding: '0.5rem 1rem', borderRadius: '4px', textDecoration: 'none', fontWeight: '500', fontSize: '0.9rem' }}>
+                                    Login as User
+                                </Link>
+                            </div>
                         )}
                     </div>
                 </div>

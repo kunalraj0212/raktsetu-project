@@ -90,7 +90,7 @@ const HeroSection = ({ stats, donorCount }) => {
                         </div>
                         <div className="live-divider"></div>
                         <div className="live-stat">
-                            <span className="live-num">{stats ? stats.totalStates : 15}+</span>
+                            <span className="live-num">28+</span>
                             <span className="live-label">States Covered</span>
                         </div>
                         <div className="live-divider"></div>
