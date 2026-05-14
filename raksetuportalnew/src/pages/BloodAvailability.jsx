@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Search, MapPin, Droplets, Building2, Filter, ChevronDown, Phone, Clock, ExternalLink } from 'lucide-react';
+import { Search, MapPin, Droplets, Building2, Filter, ChevronDown, Phone, Clock, ExternalLink, ShieldCheck } from 'lucide-react';
 import Button from '../components/Button';
 import { fetchBloodBankCount, fetchDistricts, fetchStates, searchBloodAvailability } from '../services/bloodBankService';
 import './BloodAvailability.css';
@@ -12,6 +12,7 @@ const BloodAvailability = () => {
         state: '', district: '', bloodGroup: 'All', component: ''
     });
     const [hasSearched, setHasSearched] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
     const [results, setResults] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [bankCount, setBankCount] = useState(0);
@@ -75,6 +76,7 @@ const BloodAvailability = () => {
         e.preventDefault();
         try {
             setError(null);
+            setIsSearching(true);
             const searchResults = await searchBloodAvailability(filters);
             setResults(searchResults);
             setHasSearched(true);
@@ -83,6 +85,8 @@ const BloodAvailability = () => {
             setError(err.message || 'Failed to search blood availability.');
             setResults([]);
             setHasSearched(false);
+        } finally {
+            setIsSearching(false);
         }
     };
 
@@ -143,8 +147,8 @@ const BloodAvailability = () => {
                             </div>
                         </div>
                         <div className="ba-form-actions">
-                            <Button type="submit" variant="primary" className="btn-lg">
-                                <Search size={16} /> Search
+                            <Button type="submit" variant="primary" className="btn-lg" disabled={isSearching}>
+                                {isSearching ? 'Searching...' : <><Search size={16} /> Search</>}
                             </Button>
                             <button type="button" className="ba-clear-btn" onClick={handleClear}>
                                 Clear Filters
@@ -163,15 +167,36 @@ const BloodAvailability = () => {
                         </div>
                     )}
 
+                    {/* Loading State: Skeletons */}
+                    {isSearching && (
+                        <div className="ba-results">
+                            <div className="ba-results-grid">
+                                {[...Array(8)].map((_, i) => (
+                                    <div key={i} className="ba-result-card skeleton-card">
+                                        <div className="skeleton-title"></div>
+                                        <div className="skeleton-text"></div>
+                                        <div className="skeleton-grid">
+                                            <div className="skeleton-box"></div>
+                                            <div className="skeleton-box"></div>
+                                            <div className="skeleton-box"></div>
+                                            <div className="skeleton-box"></div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     {/* Results */}
-                    {hasSearched && results.length > 0 && (
+                    {hasSearched && !isSearching && results.length > 0 && (
                         <div className="ba-results">
                             <div className="ba-results-grid">
                                 {paginatedResults.map(bank => (
                                     <div key={bank.id} className="ba-result-card">
                                         <div className="ba-card-header">
-                                            <div className="ba-card-type">
+                                            <div className="ba-card-type" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                                                 <span className={`ba-category ${bank.category.toLowerCase()}`}>{bank.category}</span>
+                                                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem', color: '#10B981', fontSize: '0.7rem', fontWeight: 'bold', backgroundColor: '#ECFDF5', padding: '0.1rem 0.4rem', borderRadius: '4px' }}><ShieldCheck size={12} /> Verified</span>
                                             </div>
                                             <h3>{bank.name}</h3>
                                             <p className="ba-address"><MapPin size={13} /> {bank.address}</p>
@@ -215,16 +240,17 @@ const BloodAvailability = () => {
                     )}
 
                     {/* Empty state */}
-                    {hasSearched && results.length === 0 && (
+                    {hasSearched && !isSearching && results.length === 0 && (
                         <div className="ba-empty">
                             <Droplets size={48} />
-                            <h3>No results found</h3>
-                            <p>Try adjusting your filters or selecting a different state/blood group.</p>
+                            <h3>No matching blood units found nearby yet</h3>
+                            <p>Try expanding your search radius or modifying your filters. If this is an emergency, please submit an Emergency Request.</p>
+                            <Button variant="outline" style={{ marginTop: '1rem' }} onClick={() => window.location.href = '/emergency'}>Go to Emergency Request</Button>
                         </div>
                     )}
 
                     {/* Initial state */}
-                    {!hasSearched && (
+                    {!hasSearched && !isSearching && (
                         <div className="ba-initial">
                             <Search size={48} />
                             <h3>Search for blood availability</h3>

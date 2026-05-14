@@ -9,11 +9,18 @@ const Footer = () => {
             <div className="container footer-grid">
                 {/* Brand */}
                 <div className="footer-col brand-col">
-                    <Link to="/" className="footer-brand">
+                    <Link to="/" className="footer-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
                         <div className="footer-logo-icon">
-                            <Droplet size={24} fill="currentColor" />
+                            <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="48" fill="#FFF" stroke="var(--primary)" strokeWidth="4"/>
+                                <path d="M50 20 C50 20, 25 50, 25 68 A25 25 0 0 0 75 68 C75 50, 50 20, 50 20 Z" fill="var(--primary)" />
+                                <circle cx="42" cy="58" r="5" fill="#FFF" />
+                                <path d="M30 80 C 30 68, 54 68, 54 80" stroke="#FFF" strokeWidth="4" fill="none" strokeLinecap="round" />
+                                <circle cx="60" cy="64" r="4" fill="#FFF" />
+                                <path d="M52 80 C 52 72, 68 72, 68 80" stroke="#FFF" strokeWidth="3" fill="none" strokeLinecap="round" />
+                            </svg>
                         </div>
-                        <span className="footer-brand-name">RaktaSetu</span>
+                        <span className="footer-brand-name" style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--white)' }}>Rakta<span style={{ color: 'var(--primary)' }}>Setu</span></span>
                     </Link>
                     <p className="footer-desc">
                         India's digital platform connecting blood donors, patients, and blood banks. Ensuring no life is lost due to blood unavailability.

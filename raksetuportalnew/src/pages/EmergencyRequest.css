@@ -1,21 +1,17 @@
 /* Emergency Request */
 .em-hero-alert {
-    background: linear-gradient(135deg, #8B0000, #B22222);
+    background: var(--accent-blood);
     color: var(--white);
-    padding: 2rem 0;
+    padding: 3rem 0;
     position: relative;
     overflow: hidden;
 }
 
-.em-hero-alert::before {
+.em-hero-alert::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: repeating-linear-gradient(45deg,
-            transparent,
-            transparent 20px,
-            rgba(255, 255, 255, 0.02) 20px,
-            rgba(255, 255, 255, 0.02) 40px);
+    background: radial-gradient(circle at 80% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -63,8 +59,9 @@
 .em-form {
     background: var(--white);
     border: 1px solid var(--gray-200);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
 }
 
 /* Urgency selector */
@@ -137,9 +134,10 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1rem;
-    color: var(--primary);
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--gray-900);
+    margin-bottom: 1.25rem;
+    font-weight: 700;
 }
 
 .em-fields-grid {
@@ -184,12 +182,17 @@
 }
 
 .em-submit-btn {
-    background: linear-gradient(135deg, #CC0000, #FF2222) !important;
-    box-shadow: 0 4px 20px rgba(204, 0, 0, 0.3);
+    background: var(--accent-blood) !important;
+    border-color: var(--accent-blood) !important;
+    box-shadow: 0 4px 15px rgba(225, 29, 72, 0.3) !important;
+    height: 54px;
+    font-size: 1.05rem;
 }
 
 .em-submit-btn:hover {
-    box-shadow: 0 6px 30px rgba(204, 0, 0, 0.45) !important;
+    background: #BE123C !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(225, 29, 72, 0.4) !important;
 }
 
 /* Sidebar */
@@ -199,24 +202,26 @@
 }
 
 .em-helpline-card {
-    background: #FEF2F2;
+    background: #FFF1F2;
     border: 1px solid #FECACA;
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
+    border-radius: var(--radius-xl);
+    padding: 2rem 1.5rem;
     text-align: center;
-    color: var(--primary);
+    color: var(--accent-blood);
+    box-shadow: var(--shadow-sm);
 }
 
 .em-helpline-card h4 {
-    margin: 0.75rem 0 0.25rem;
-    font-size: 0.95rem;
+    margin: 1rem 0 0.5rem;
+    font-size: 1rem;
+    color: var(--gray-900);
 }
 
 .em-helpline-number {
     display: block;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    color: var(--primary);
+    color: var(--accent-blood);
     text-decoration: none;
     margin-bottom: 0.5rem;
 }

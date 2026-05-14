@@ -1,185 +1,136 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Droplet, Search, ChevronDown, Menu, X, LogOut, User as UserIcon } from 'lucide-react';
+import { Droplet, Search, Eye, Moon, User as UserIcon, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [activeDropdown, setActiveDropdown] = useState(null);
-    const dropdownRef = useRef(null);
     const navigate = useNavigate();
     const { user, logout } = useAuth();
-
-    const navItems = [
-        { label: 'Home', path: '/' },
-        {
-            label: 'About RaktaSetu', path: '/about', hasDropdown: true,
-            children: [
-                { label: 'Our Mission', path: '/about' },
-                { label: 'How It Works', path: '/how-it-works' },
-                { label: 'Our Features', path: '/features' },
-            ]
-        },
-        {
-            label: 'Looking for Blood', path: '/blood-availability', hasDropdown: true,
-            children: [
-                { label: 'Blood Availability Search', path: '/blood-availability' },
-                { label: 'Blood Center Directory', path: '/blood-availability' },
-                { label: 'Emergency Request', path: '/emergency' },
-            ]
-        },
-        {
-            label: 'Want to Donate', path: '/register-donor', hasDropdown: true,
-            children: [
-                { label: 'Donor Registration', path: '/register-donor' },
-                { label: 'Donation Process', path: '/how-it-works' },
-                { label: 'Find Nearby Camps', path: '/blood-availability' },
-                { label: 'About Blood Donation', path: '/about' },
-            ]
-        },
-        {
-            label: 'For Blood Banks', path: '/blood-banks', hasDropdown: true,
-            children: [
-                { label: 'Register Your Blood Bank', path: '/blood-banks' },
-                { label: 'Dashboard Features', path: '/features' },
-                { label: 'Contact Us', path: '/contact' },
-            ]
-        },
-    ];
+    const [fontSize, setFontSize] = useState(100);
+    const [isHighContrast, setIsHighContrast] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-                setActiveDropdown(null);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+        document.documentElement.style.fontSize = `${fontSize}%`;
+    }, [fontSize]);
 
-    const toggleDropdown = (index) => {
-        setActiveDropdown(activeDropdown === index ? null : index);
-    };
+    useEffect(() => {
+        if (isHighContrast) document.body.classList.add('high-contrast-mode');
+        else document.body.classList.remove('high-contrast-mode');
+    }, [isHighContrast]);
 
-    const closeAll = () => {
-        setIsOpen(false);
-        setActiveDropdown(null);
+    const changeFontSize = (step) => {
+        setFontSize(prev => {
+            if (step === 0) return 100;
+            return Math.max(80, Math.min(120, prev + step));
+        });
     };
 
     return (
         <header className="site-header">
-            {/* Top bar with logo and search */}
-            <div className="header-top">
-                <div className="container header-top-inner">
-                    <Link to="/" className="header-brand" onClick={closeAll}>
-                        <div className="brand-logo">
-                            <Droplet size={32} fill="currentColor" />
+            {/* 1. Government & Accessibility Top Bar */}
+            <div className="gov-top-bar">
+                <div className="container top-bar-inner">
+                    <div className="top-bar-left">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem of India" className="gov-emblem" />
+                        <span>GOVERNMENT OF INDIA | MINISTRY OF HEALTH & FAMILY WELFARE</span>
+                    </div>
+                    <div className="top-bar-right">
+                        <span className="helpline-text">National Helpline: <span className="helpline-number">104</span></span>
+                        <div className="top-bar-divider"></div>
+                        <div className="font-controls">
+                            <button onClick={() => changeFontSize(-10)}>A-</button>
+                            <button onClick={() => changeFontSize(0)}>A</button>
+                            <button onClick={() => changeFontSize(10)}>A+</button>
                         </div>
-                        <div className="brand-text">
-                            <span className="brand-name">RaktaSetu</span>
-                            <span className="brand-tagline">Connecting Lives Through Blood</span>
-                        </div>
-                    </Link>
-                    <div className="header-actions" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <div className="header-search" style={{ marginRight: '1rem' }}>
-                            <Search size={16} className="search-icon" />
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                className="search-input"
-                                aria-label="Search the site"
-                            />
-                        </div>
-                        {user ? (
-                            <div className="user-profile" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: '500', color: '#1f2937' }}>
-                                    <UserIcon size={18} />
-                                    <span>{user.fullName || 'User'}</span>
-                                </div>
-                                <button onClick={() => { logout(); navigate('/'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', background: 'none', border: '1px solid #e5e7eb', padding: '0.4rem 0.75rem', borderRadius: '4px', cursor: 'pointer', color: '#4b5563', fontSize: '0.875rem' }}>
-                                    <LogOut size={14} />
-                                    Logout
-                                </button>
-                            </div>
-                        ) : (
-                            <div style={{ display: 'flex', gap: '0.75rem' }}>
-                                <Link to="/register-bloodbank" style={{ backgroundColor: '#1e3a8a', color: 'white', padding: '0.5rem 1rem', borderRadius: '4px', textDecoration: 'none', fontWeight: '500', fontSize: '0.9rem' }}>
-                                    Blood Bank Login
-                                </Link>
-                                <Link to="/login" style={{ backgroundColor: '#8B0000', color: 'white', padding: '0.5rem 1rem', borderRadius: '4px', textDecoration: 'none', fontWeight: '500', fontSize: '0.9rem' }}>
-                                    Login as User
-                                </Link>
-                            </div>
-                        )}
+                        <div className="top-bar-divider"></div>
+                        <button className="contrast-toggle" onClick={() => setIsHighContrast(!isHighContrast)}>
+                            {isHighContrast ? <Eye size={14} /> : <Moon size={14} />}
+                            <span>High Contrast</span>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            {/* Navigation bar */}
-            <nav className="main-nav" ref={dropdownRef} aria-label="Main navigation">
-                <div className="container nav-inner">
-                    <button
-                        className="nav-toggle"
-                        onClick={() => setIsOpen(!isOpen)}
-                        aria-label={isOpen ? 'Close menu' : 'Open menu'}
-                        aria-expanded={isOpen}
-                    >
-                        {isOpen ? <X size={22} /> : <Menu size={22} />}
-                    </button>
+            {/* 2. Main Premium Navbar */}
+            <div className="main-navbar">
+                <div className="container nav-container">
+                    {/* Brand */}
+                    <Link to="/" className="brand-link">
+                        <div className="brand-logo-container">
+                            <svg width="44" height="44" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="brand-logo-svg">
+                                <circle cx="50" cy="50" r="48" fill="#FFF" stroke="var(--primary)" strokeWidth="4"/>
+                                <path d="M50 20 C50 20, 25 50, 25 68 A25 25 0 0 0 75 68 C75 50, 50 20, 50 20 Z" fill="var(--primary)" />
+                                <circle cx="42" cy="58" r="5" fill="#FFF" />
+                                <path d="M30 80 C 30 68, 54 68, 54 80" stroke="#FFF" strokeWidth="4" fill="none" strokeLinecap="round" />
+                                <circle cx="60" cy="64" r="4" fill="#FFF" />
+                                <path d="M52 80 C 52 72, 68 72, 68 80" stroke="#FFF" strokeWidth="3" fill="none" strokeLinecap="round" />
+                            </svg>
+                        </div>
+                        <div className="brand-text">
+                            <div className="brand-title">
+                                <span className="text-dark">Rakta</span><span className="text-primary">Setu</span>
+                            </div>
+                            <span className="brand-tagline">Bridging Hearts. Saving Lives.</span>
+                        </div>
+                    </Link>
 
-                    <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
-                        {navItems.map((item, index) => (
-                            <li key={index} className={`nav-item ${item.hasDropdown ? 'has-dropdown' : ''}`}>
-                                {item.hasDropdown ? (
-                                    <>
-                                        <button
-                                            className={`nav-link dropdown-trigger ${activeDropdown === index ? 'open' : ''}`}
-                                            onClick={() => toggleDropdown(index)}
-                                            aria-expanded={activeDropdown === index}
-                                            aria-haspopup="true"
-                                        >
-                                            {item.label}
-                                            <ChevronDown size={14} className={`chevron ${activeDropdown === index ? 'rotated' : ''}`} />
-                                        </button>
-                                        <ul className={`dropdown-menu ${activeDropdown === index ? 'show' : ''}`}>
-                                            {item.children.map((child, ci) => (
-                                                <li key={ci}>
-                                                    <Link
-                                                        to={child.path}
-                                                        className="dropdown-link"
-                                                        onClick={closeAll}
-                                                    >
-                                                        {child.label}
-                                                    </Link>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </>
-                                ) : (
-                                    <NavLink
-                                        to={item.path}
-                                        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                                        onClick={closeAll}
-                                        end
-                                    >
-                                        {item.label}
-                                    </NavLink>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
+                    {/* Links */}
+                    <nav className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+                        <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>Home</NavLink>
+                        <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>About Us</NavLink>
+                        <NavLink to="/blood-availability" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>Find Blood</NavLink>
+                        <NavLink to="/register-donor" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>Donate</NavLink>
+                        <NavLink to="/blood-banks" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>Blood Banks</NavLink>
+                        
+                        {/* Mobile Auth Buttons (visible only on mobile) */}
+                        {!user && (
+                            <div className="mobile-auth-buttons">
+                                <Link to="/register-bloodbank" className="btn-outline-primary" onClick={() => setIsMobileMenuOpen(false)}>Blood Bank Login</Link>
+                                <Link to="/login" className="btn-solid-primary" onClick={() => setIsMobileMenuOpen(false)}>Login / Register</Link>
+                            </div>
+                        )}
+                    </nav>
+
+                    {/* Actions */}
+                    <div className="nav-actions">
+                        <button className="nav-search-btn" aria-label="Search">
+                            <Search size={18} />
+                        </button>
+                        
+                        {user ? (
+                            <div className="user-profile">
+                                <Link to="/donor-dashboard" className="user-info" style={{ textDecoration: 'none', color: 'inherit' }}>
+                                    <UserIcon size={18} />
+                                    <span>{user.fullName || 'User'}</span>
+                                </Link>
+                                <button onClick={() => { logout(); navigate('/'); }} className="logout-btn">
+                                    <LogOut size={14} /> Logout
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="auth-buttons">
+                                <Link to="/register-bloodbank" className="btn-outline-primary">Blood Bank Login</Link>
+                                <Link to="/login" className="btn-solid-primary">Login / Register</Link>
+                            </div>
+                        )}
+                        <button className="mobile-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle Menu">
+                            {isMobileMenuOpen ? <span style={{ fontSize: '1.5rem' }}>×</span> : <span style={{ fontSize: '1.5rem' }}>≡</span>}
+                        </button>
+                    </div>
                 </div>
-            </nav>
+            </div>
 
-            {/* Marquee ticker */}
-            <div className="ticker-bar">
-                <div className="container">
-                    <div className="ticker-content">
-                        <span className="ticker-icon">🩸</span>
-                        <span>Be a life saver! </span>
-                        <span className="ticker-highlight">Donate blood and help save lives. Every drop counts!</span>
-                        <span className="ticker-icon"> 🩸</span>
+            {/* 3. Soft Red Ticker */}
+            <div className="hero-ticker">
+                <div className="container ticker-flex">
+                    <div className="ticker-item">
+                        <span className="ticker-drop">💧</span> Be a hero. <span className="text-primary-bold">Donate blood, save lives.</span>
+                    </div>
+                    <div className="ticker-divider">|</div>
+                    <div className="ticker-item">
+                        <span className="text-primary-bold">Every drop counts, every second matters.</span> <span className="ticker-heart">❤️</span>
                     </div>
                 </div>
             </div>

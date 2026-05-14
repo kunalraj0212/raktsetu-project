@@ -5,6 +5,7 @@ import {
     CheckCircle, ShieldCheck
 } from 'lucide-react';
 import Button from '../components/Button';
+import EligibilityChecker from '../components/EligibilityChecker';
 import useForm from '../hooks/useForm';
 import { useAuth } from '../context/AuthContext';
 import './DonorRegistration.css';
@@ -21,6 +22,7 @@ const DonorRegistration = () => {
         password: '', agreeTerms: false
     };
     const [registeredDonor, setRegisteredDonor] = useState(null);
+    const [isEligible, setIsEligible] = useState(false);
     const { register } = useAuth();
 
     const validate = (data) => {
@@ -109,7 +111,7 @@ const DonorRegistration = () => {
                             </div>
                             <p className="dr-success-note">You are now logged in and can access all features.</p>
                             <div className="dr-success-actions">
-                                <Link to="/"><Button variant="primary">Go to Home</Button></Link>
+                                <Link to="/donor-dashboard"><Button variant="primary">Go to Dashboard</Button></Link>
                                 <Link to="/blood-availability"><Button variant="secondary">Search Blood</Button></Link>
                             </div>
                         </div>
@@ -129,8 +131,14 @@ const DonorRegistration = () => {
             </section>
 
             <section className="section">
-                <div className="container dr-grid">
-                    <form className="dr-form" onSubmit={handleSubmit} noValidate>
+                <div className="container">
+                    {!isEligible ? (
+                        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                            <EligibilityChecker onComplete={() => setIsEligible(true)} />
+                        </div>
+                    ) : (
+                        <div className="dr-grid">
+                            <form className="dr-form" onSubmit={handleSubmit} noValidate>
                         <div className="dr-form-section">
                             <h3><User size={18} /> Account Information</h3>
                             <div className="dr-fields-grid">
@@ -272,7 +280,9 @@ const DonorRegistration = () => {
                             <h4>After Registration</h4>
                             <p>You'll be matched with nearby blood centers and notified when your blood group is needed in your area.</p>
                         </div>
-                    </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
         </div>

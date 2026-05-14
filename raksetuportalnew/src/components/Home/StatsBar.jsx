@@ -4,17 +4,23 @@ const StatsBar = ({ stats }) => {
     if (!stats) return null;
     
     return (
-        <section className="blood-group-bar">
+        <section className="blood-group-bar" data-aos="fade-up">
             <div className="container">
-                <div className="bg-bar-inner">
-                    <h3 className="bg-bar-title">Real-Time Blood Stock</h3>
-                    <div className="bg-group-grid">
-                        {Object.entries(stats.groupTotals).map(([group, count]) => (
-                            <div key={group} className="bg-group-item">
-                                <div className={`bg-circle ${count < 50 ? 'low' : count < 100 ? 'medium' : 'high'}`}>
+                <div className="bg-bar-inner premium-stats-card">
+                    <div className="stats-header">
+                        <div className="pulse-dot"></div>
+                        <h3 className="bg-bar-title">Live National Inventory</h3>
+                    </div>
+                    <div className="bg-group-grid premium-grid">
+                        {Object.entries(stats.groupTotals).map(([group, count], idx) => (
+                            <div key={group} className="bg-group-item premium-item" data-aos="zoom-in" data-aos-delay={idx * 50}>
+                                <div className={`bg-circle premium-circle ${count < 50 ? 'low' : count < 100 ? 'medium' : 'high'}`}>
                                     <span className="bg-label">{group}</span>
                                 </div>
-                                <span className="bg-count">{count} units</span>
+                                <div className="bg-count-wrap">
+                                    <span className="bg-count">{count}</span>
+                                    <span className="bg-unit-label">units</span>
+                                </div>
                             </div>
                         ))}
                     </div>

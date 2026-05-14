@@ -51,6 +51,37 @@ const About = () => {
                     </div>
                 </div>
             </section>
+            <section className="section team-section" style={{ backgroundColor: 'var(--white)' }}>
+                <div className="container">
+                    <h2 className="section-title text-center">The Project Team</h2>
+                    <p className="text-center" style={{ color: 'var(--gray-600)', marginBottom: '2rem', fontSize: '0.95rem' }}>
+                        This is an End Semester Project for <strong>IIT Patna</strong> developed by:
+                    </p>
+                    <div className="team-grid" style={{ 
+                        display: 'flex', 
+                        flexWrap: 'wrap', 
+                        gap: '1.5rem', 
+                        justifyContent: 'center',
+                        maxWidth: '800px',
+                        margin: '0 auto'
+                    }}>
+                        {['Kunal Raj', 'Keshav', 'Mayank', 'Mayank Rajput', 'Manshi'].map((member, idx) => (
+                            <div key={idx} className="team-member" style={{
+                                padding: '1rem 2rem',
+                                background: 'var(--primary-bg)',
+                                borderRadius: '100px',
+                                border: '1px solid var(--primary-light)',
+                                fontWeight: '700',
+                                color: 'var(--primary-dark)',
+                                fontSize: '1.05rem',
+                                boxShadow: 'var(--shadow-sm)'
+                            }}>
+                                {member}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };

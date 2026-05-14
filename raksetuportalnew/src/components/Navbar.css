@@ -1,37 +1,113 @@
 /* ==============================
-   SITE HEADER
+   SITE HEADER (REDESIGN)
    ============================== */
 
-/* Header Top — Logo + Search */
-.header-top {
-    background: var(--white);
-    border-bottom: 1px solid var(--gray-200);
-    padding: 0.75rem 0;
+/* 1. Government Top Bar */
+.gov-top-bar {
+    background-color: var(--gray-900);
+    color: var(--white);
+    padding: 0.35rem 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
 }
 
-.header-top-inner {
+.top-bar-inner {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    align-items: center;
 }
 
-.header-brand {
+.top-bar-left {
     display: flex;
     align-items: center;
     gap: 0.75rem;
 }
 
-.brand-logo {
-    width: 48px;
-    height: 48px;
-    background: var(--primary);
+.gov-emblem {
+    height: 22px;
+    filter: brightness(0) invert(1);
+}
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.helpline-text {
+    color: var(--gray-300);
+}
+
+.helpline-number {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.top-bar-divider {
+    width: 1px;
+    height: 12px;
+    background-color: var(--gray-600);
+}
+
+.font-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.font-controls button,
+.contrast-toggle {
+    background: none;
+    border: none;
     color: var(--white);
-    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: color 0.2s;
+    font-family: inherit;
+}
+
+.font-controls button:hover,
+.contrast-toggle:hover {
+    color: var(--primary-light);
+}
+
+/* 2. Main Navbar */
+.main-navbar {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--gray-100);
+    padding: 0.75rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.brand-logo-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+}
+
+.brand-logo-svg {
+    width: 44px;
+    height: 44px;
 }
 
 .brand-text {
@@ -39,266 +115,270 @@
     flex-direction: column;
 }
 
-.brand-name {
+.brand-title {
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--primary);
     line-height: 1;
+    letter-spacing: -0.02em;
 }
+
+.text-dark { color: var(--gray-900); }
+.text-primary { color: var(--primary); }
 
 .brand-tagline {
     font-size: 0.7rem;
     color: var(--gray-500);
     font-weight: 500;
-    letter-spacing: 0.03em;
+    margin-top: 0.15rem;
 }
 
-.header-search {
-    position: relative;
-    width: 240px;
-}
-
-.search-icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--gray-400);
-    pointer-events: none;
-}
-
-.search-input {
-    width: 100%;
-    padding: 0.5rem 0.75rem 0.5rem 2rem;
-    border: 1px solid var(--gray-300);
-    border-radius: var(--radius-md);
-    font-size: 0.875rem;
-    font-family: inherit;
-    color: var(--text-dark);
-    transition: border-color var(--transition-fast);
-    background: var(--gray-50);
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: var(--primary);
-    background: var(--white);
-}
-
-/* ==============================
-   MAIN NAVIGATION BAR
-   ============================== */
-.main-nav {
-    background: var(--primary);
-    position: relative;
-    z-index: 100;
-}
-
-.nav-inner {
+/* Nav Links */
+.nav-links {
     display: flex;
+    gap: 1.5rem;
     align-items: center;
-    padding: 0;
-}
-
-.nav-toggle {
-    display: none;
-    color: var(--white);
-    padding: 0.75rem;
-}
-
-.nav-menu {
-    display: flex;
-    width: 100%;
-}
-
-.nav-item {
-    position: relative;
 }
 
 .nav-link {
+    text-decoration: none;
+    color: var(--gray-700);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.2s;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+}
+
+.nav-link.active {
+    color: var(--primary);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+/* Actions */
+.nav-actions {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.85rem 1.25rem;
-    color: var(--white);
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: background var(--transition-fast);
-    white-space: nowrap;
-    cursor: pointer;
-    border: none;
-    background: none;
-    font-family: inherit;
+    gap: 1rem;
 }
 
-.nav-link:hover,
-.nav-link.active,
-.nav-link.open {
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.chevron {
-    transition: transform var(--transition-fast);
-    flex-shrink: 0;
-}
-
-.chevron.rotated {
-    transform: rotate(180deg);
-}
-
-/* Dropdown */
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 220px;
-    background: var(--white);
+.nav-search-btn {
+    background: var(--gray-50);
     border: 1px solid var(--gray-200);
-    border-top: 3px solid var(--primary);
-    box-shadow: var(--shadow-lg);
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-4px);
-    transition: all var(--transition-fast);
-    z-index: 200;
-}
-
-.dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-link {
-    display: block;
-    padding: 0.65rem 1.25rem;
-    color: var(--text-dark);
-    font-size: 0.875rem;
-    transition: all var(--transition-fast);
-    border-left: 3px solid transparent;
-}
-
-.dropdown-link:hover {
-    background: var(--primary-bg);
-    color: var(--primary);
-    border-left-color: var(--primary);
-}
-
-/* ==============================
-   TICKER BAR
-   ============================== */
-.ticker-bar {
-    background: linear-gradient(90deg, #FDF2F2, #FEF3C7, #FDF2F2);
-    padding: 0.4rem 0;
-    border-bottom: 1px solid var(--gray-200);
-}
-
-.ticker-content {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--text-dark);
-    animation: ticker-slide 20s linear infinite;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.ticker-icon {
-    font-size: 1rem;
-}
-
-.ticker-highlight {
+.nav-search-btn:hover {
+    background: var(--white);
+    border-color: var(--primary);
     color: var(--primary);
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn-outline-primary {
+    text-decoration: none;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
     font-weight: 600;
+    transition: all 0.2s;
+    background: var(--white);
 }
 
-@keyframes ticker-slide {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    50% {
-        transform: translateX(-5px);
-    }
+.btn-outline-primary:hover {
+    background: var(--primary-bg);
 }
 
-/* ==============================
-   RESPONSIVE
-   ============================== */
-@media (max-width: 900px) {
-    .header-search {
-        display: none;
-    }
+.btn-solid-primary {
+    text-decoration: none;
+    color: var(--white);
+    background: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    box-shadow: 0 4px 10px rgba(225, 29, 72, 0.2);
+}
 
-    .nav-toggle {
-        display: flex;
-    }
+.btn-solid-primary:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 6px 15px rgba(225, 29, 72, 0.3);
+    transform: translateY(-1px);
+}
 
-    .nav-menu {
+/* User Profile */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    font-size: 0.9rem;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.logout-btn:hover {
+    background: var(--white);
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+/* 3. Soft Red Ticker */
+.hero-ticker {
+    background-color: var(--primary-bg);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #FFE4E6;
+}
+
+.ticker-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.8125rem;
+    color: var(--gray-700);
+}
+
+.text-primary-bold {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.ticker-divider {
+    color: var(--primary-light);
+    opacity: 0.5;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--gray-800);
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+}
+
+.mobile-auth-buttons {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .nav-links {
         display: none;
-        flex-direction: column;
         position: absolute;
         top: 100%;
         left: 0;
-        right: 0;
-        background: var(--primary);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: var(--shadow-lg);
-        z-index: 200;
+        width: 100%;
+        background-color: var(--white);
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem 0;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        border-top: 1px solid var(--gray-100);
+        align-items: stretch;
     }
 
-    .nav-menu.active {
+    .nav-links.mobile-open {
         display: flex;
     }
 
     .nav-link {
-        padding: 0.75rem 1.5rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--gray-50);
+    }
+    
+    .nav-link:last-child {
+        border-bottom: none;
     }
 
-    .dropdown-menu {
-        position: static;
-        background: rgba(0, 0, 0, 0.15);
-        border: none;
-        border-top: none;
-        box-shadow: none;
-        border-radius: 0;
-        opacity: 1;
-        visibility: hidden;
-        transform: none;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height var(--transition-normal), visibility var(--transition-normal);
+    .nav-link.active::after {
+        display: none;
     }
 
-    .dropdown-menu.show {
-        visibility: visible;
-        max-height: 300px;
+    .nav-link.active {
+        background-color: var(--primary-bg);
+        border-left: 3px solid var(--primary);
     }
 
-    .dropdown-link {
-        color: rgba(255, 255, 255, 0.9);
-        padding: 0.5rem 2.5rem;
-        border-left-color: transparent;
+    .auth-buttons {
+        display: none;
     }
 
-    .dropdown-link:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--white);
-        border-left-color: var(--white);
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .mobile-auth-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem 1.5rem;
+        border-top: 1px solid var(--gray-100);
+        margin-top: 0.5rem;
+    }
+    
+    .mobile-auth-buttons a {
+        text-align: center;
     }
 }
 
-@media (max-width: 480px) {
-    .brand-name {
-        font-size: 1.25rem;
-    }
-
-    .brand-tagline {
+@media (max-width: 768px) {
+    .top-bar-right .font-controls,
+    .top-bar-right .contrast-toggle span {
         display: none;
+    }
+    
+    .gov-top-bar {
+        font-size: 0.65rem;
     }
 }

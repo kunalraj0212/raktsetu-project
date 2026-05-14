@@ -1,140 +1,171 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Search, Heart, CircleDot, Droplets, AlertTriangle, CheckCircle, Calendar } from 'lucide-react';
-import Button from '../Button';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Search, MapPin, Droplets, Heart, ShieldCheck, Users, Lock, ChevronDown, User } from 'lucide-react';
+import { bloodGroups } from '../../utils/validators';
 
-const HeroSection = ({ stats, donorCount }) => {
+const HeroSection = ({ stats }) => {
+    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useState({
+        target: 'someone',
+        state: '',
+        district: '',
+        bloodGroup: ''
+    });
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        navigate('/blood-availability', { state: searchParams });
+    };
+
     return (
-        <section className="hero-immersive">
-            {/* Fluid background blobs */}
-            <div className="fluid-bg">
-                <div className="blob blob-1"></div>
-                <div className="blob blob-2"></div>
-                <div className="blob blob-3"></div>
-                <div className="blob blob-4"></div>
-                <div className="fluid-noise"></div>
-            </div>
-
-            {/* Floating particles */}
-            <div className="particles">
-                {[...Array(12)].map((_, i) => (
-                    <span key={i} className={`particle p-${i}`}></span>
-                ))}
-            </div>
-
-            {/* Blood drop animation */}
-            <div className="hero-blood-drop">
-                <svg viewBox="0 0 100 140" className="drop-svg">
-                    <defs>
-                        <radialGradient id="dropGrad" cx="40%" cy="40%">
-                            <stop offset="0%" stopColor="#FF4444" />
-                            <stop offset="50%" stopColor="#CC0000" />
-                            <stop offset="100%" stopColor="#8B0000" />
-                        </radialGradient>
-                        <filter id="dropGlow">
-                            <feGaussianBlur stdDeviation="4" result="blur" />
-                            <feMerge>
-                                <feMergeNode in="blur" />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
-                    </defs>
-                    <path
-                        d="M50 10 C50 10 15 55 15 80 C15 100 30 130 50 130 C70 130 85 100 85 80 C85 55 50 10 50 10Z"
-                        fill="url(#dropGrad)"
-                        filter="url(#dropGlow)"
-                        className="drop-path"
-                    />
-                    <ellipse cx="35" cy="65" rx="8" ry="12" fill="rgba(255,255,255,0.15)" transform="rotate(-20, 35, 65)" />
-                </svg>
-            </div>
-
-            <div className="container hero-grid">
-                <div className="hero-text">
-                    <div className="hero-badge">
-                        <CircleDot size={14} />
-                        <span>India's Trusted Blood Network</span>
-                    </div>
-                    <h1 className="hero-headline">
-                        Every Drop<br />
-                        <span className="hero-accent">Saves a Life.</span>
+        <section className="hero-premium">
+            <div className="hero-bg-accent"></div>
+            
+            <div className="container hero-container">
+                {/* Left Side: Typography & CTA */}
+                <div className="hero-content">
+                    <h1 className="hero-heading">
+                        Find <span className="text-primary">Lifesaving</span> Blood.<br/>
+                        Anywhere. Anytime.
                     </h1>
-                    <p className="hero-sub">
-                        Real-time blood availability. Instant donor matching.
-                        Emergency alerts across India. Join the movement that's
-                        saving thousands of lives.
+                    
+                    <p className="hero-subtext">
+                        India's most trusted blood availability network.<br/>
+                        Instant search • Verified blood banks • Real-time availability
                     </p>
-                    <div className="hero-actions">
-                        <Link to="/blood-availability">
-                            <Button variant="primary" className="btn-lg hero-btn-glow">
-                                <Search size={18} /> Search Blood Now
-                            </Button>
+                    
+                    <div className="hero-cta-group">
+                        <Link to="/blood-availability" className="btn-solid-primary hero-btn">
+                            <Droplets size={18} fill="currentColor" /> Find Blood Now
                         </Link>
-                        <Link to="/register-donor">
-                            <Button variant="secondary" className="btn-lg hero-btn-outline">
-                                <Heart size={18} /> Become a Donor
-                            </Button>
+                        <Link to="/register-donor" className="btn-outline-primary hero-btn btn-white-bg">
+                            <Heart size={18} /> Donate Blood
                         </Link>
                     </div>
-
-                    {/* Live stats ticker */}
-                    <div className="hero-live-stats">
-                        <div className="live-stat">
-                            <span className="live-num">{stats ? stats.totalBanks : 40}+</span>
-                            <span className="live-label">Blood Banks</span>
-                        </div>
-                        <div className="live-divider"></div>
-                        <div className="live-stat">
-                            <span className="live-num">{stats ? stats.totalUnits.toLocaleString() : '0'}</span>
-                            <span className="live-label">Units Available</span>
-                        </div>
-                        <div className="live-divider"></div>
-                        <div className="live-stat">
-                            <span className="live-num">28+</span>
-                            <span className="live-label">States Covered</span>
-                        </div>
-                        <div className="live-divider"></div>
-                        <div className="live-stat">
-                            <span className="live-num">{10000 + donorCount}</span>
-                            <span className="live-label">Donors</span>
-                        </div>
+                    
+                    <div className="hero-trust-row">
+                        <span className="trust-item"><ShieldCheck size={16} /> Verified Network</span>
+                        <span className="trust-item"><Lock size={16} /> Secure & Private</span>
+                        <span className="trust-item"><Users size={16} /> {stats ? stats.totalBanks : 3893}+ Blood Banks</span>
                     </div>
                 </div>
 
-                {/* Glass cards stack */}
-                <div className="hero-cards-area">
-                    <div className="glass-card gc-1">
-                        <div className="gc-icon gc-red"><Droplets size={22} /></div>
-                        <div className="gc-body">
-                            <strong>A+ Available</strong>
-                            <span>City Hospital, Mumbai — 12 units</span>
+                {/* Right Side: Image & Floating Cards */}
+                <div className="hero-visual">
+                    <div className="visual-circle-bg"></div>
+                    <img src="/hero_blood_drop.png" alt="Hands holding a lifesaver blood drop" className="hero-main-img" />
+                    
+                    {/* Floating Stat 1 */}
+                    <div className="floating-stat stat-top-left">
+                        <div className="stat-icon-wrapper bg-red-soft">
+                            <Users size={20} className="text-primary" />
                         </div>
-                        <div className="gc-badge available">Live</div>
-                    </div>
-                    <div className="glass-card gc-2">
-                        <div className="gc-icon gc-orange"><AlertTriangle size={22} /></div>
-                        <div className="gc-body">
-                            <strong>Emergency Request</strong>
-                            <span>O- needed urgently — AIIMS Delhi</span>
+                        <div className="stat-text">
+                            <span className="stat-num">25L+</span>
+                            <span className="stat-label">Lives Impacted</span>
                         </div>
-                        <div className="gc-badge urgent">Urgent</div>
                     </div>
-                    <div className="glass-card gc-3">
-                        <div className="gc-icon gc-green"><CheckCircle size={22} /></div>
-                        <div className="gc-body">
-                            <strong>Donor Matched!</strong>
-                            <span>Response in 8 minutes ❤️</span>
+                    
+                    {/* Floating Stat 2 */}
+                    <div className="floating-stat stat-bottom-left">
+                        <div className="stat-icon-wrapper bg-red-soft">
+                            <Droplets size={20} className="text-primary" fill="currentColor" />
                         </div>
-                        <div className="gc-badge matched">Done</div>
+                        <div className="stat-text">
+                            <span className="stat-num">12L+</span>
+                            <span className="stat-label">Units Available</span>
+                        </div>
                     </div>
-                    <div className="glass-card gc-4">
-                        <div className="gc-icon gc-blue"><Calendar size={22} /></div>
-                        <div className="gc-body">
-                            <strong>Donation Scheduled</strong>
-                            <span>Feb 22 at Red Cross, Delhi</span>
+                    
+                    {/* Floating Stat 3 */}
+                    <div className="floating-stat stat-right">
+                        <div className="stat-icon-wrapper bg-gray-soft">
+                            <ShieldCheck size={20} className="text-dark" />
+                        </div>
+                        <div className="stat-text">
+                            <span className="stat-num">3893+</span>
+                            <span className="stat-label">Verified Banks</span>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {/* Floating Integrated Command Center Search Bar */}
+            <div className="container search-container-wrapper">
+                <form className="hero-command-center" onSubmit={handleSearch}>
+                    
+                    <div className="search-segment segment-target">
+                        <label>I need blood for</label>
+                        <div className="target-toggle">
+                            <button 
+                                type="button" 
+                                className={`target-btn ${searchParams.target === 'self' ? 'active' : ''}`}
+                                onClick={() => setSearchParams({...searchParams, target: 'self'})}
+                            >
+                                <User size={14} /> Self / Family
+                            </button>
+                            <button 
+                                type="button" 
+                                className={`target-btn ${searchParams.target === 'someone' ? 'active' : ''}`}
+                                onClick={() => setSearchParams({...searchParams, target: 'someone'})}
+                            >
+                                <Users size={14} /> Someone Else
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="search-segment">
+                        <label>Select State</label>
+                        <div className="input-with-icon">
+                            <MapPin size={18} className="text-primary" />
+                            <select 
+                                value={searchParams.state}
+                                onChange={(e) => setSearchParams({...searchParams, state: e.target.value})}
+                            >
+                                <option value="">Choose State</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Delhi">Delhi</option>
+                                {/* Add dynamic states here */}
+                            </select>
+                            <ChevronDown size={16} className="select-arrow" />
+                        </div>
+                    </div>
+
+                    <div className="search-segment">
+                        <label>Select District</label>
+                        <div className="input-with-icon">
+                            <MapPin size={18} className="text-primary" />
+                            <select 
+                                value={searchParams.district}
+                                onChange={(e) => setSearchParams({...searchParams, district: e.target.value})}
+                            >
+                                <option value="">Choose District</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="New Delhi">New Delhi</option>
+                            </select>
+                            <ChevronDown size={16} className="select-arrow" />
+                        </div>
+                    </div>
+
+                    <div className="search-segment">
+                        <label>Blood Group</label>
+                        <div className="input-with-icon">
+                            <Droplets size={18} className="text-primary" />
+                            <select 
+                                value={searchParams.bloodGroup}
+                                onChange={(e) => setSearchParams({...searchParams, bloodGroup: e.target.value})}
+                            >
+                                <option value="">Select Blood Group</option>
+                                {bloodGroups.map(bg => <option key={bg} value={bg}>{bg}</option>)}
+                            </select>
+                            <ChevronDown size={16} className="select-arrow" />
+                        </div>
+                    </div>
+
+                    <button type="submit" className="search-submit-btn">
+                        <Search size={20} /> Search Blood
+                    </button>
+                </form>
             </div>
         </section>
     );

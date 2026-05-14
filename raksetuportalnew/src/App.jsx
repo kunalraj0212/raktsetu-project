@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 // Lazy load all pages for code splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -19,6 +21,7 @@ const EmergencyRequest = lazy(() => import('./pages/EmergencyRequest'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const DonorDashboard = lazy(() => import('./pages/DonorDashboard'));
 
 // Page loading fallback
 const PageLoader = () => (
@@ -46,6 +49,15 @@ const PageLoader = () => (
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
+  React.useEffect(() => {
+    AOS.init({
+      duration: 600,
+      once: true,
+      easing: 'ease-out-quad',
+      offset: 30
+    });
+  }, []);
+
   return (
     <ErrorBoundary>
       <AuthProvider>
@@ -64,6 +76,7 @@ function App() {
                 <Route path="register-bloodbank" element={<BloodBankRegistration />} />
                 <Route path="login" element={<Login />} />
                 <Route path="emergency" element={<ProtectedRoute><EmergencyRequest /></ProtectedRoute>} />
+                <Route path="donor-dashboard" element={<ProtectedRoute><DonorDashboard /></ProtectedRoute>} />
                 <Route path="privacy" element={<PrivacyPolicy />} />
                 <Route path="terms" element={<Terms />} />
                 <Route path="*" element={<NotFound />} />

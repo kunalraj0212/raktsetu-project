@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getStats, fetchDonorCount } from '../services/bloodBankService';
 import HeroSection from '../components/Home/HeroSection';
+import EmergencyCarousel from '../components/Home/EmergencyCarousel';
 import StatsBar from '../components/Home/StatsBar';
 import WorkflowSection from '../components/Home/WorkflowSection';
+import ImpactStories from '../components/Home/ImpactStories';
 import ServicesSection from '../components/Home/ServicesSection';
 import DonateSection from '../components/Home/DonateSection';
 import TestimonialsSection from '../components/Home/TestimonialsSection';
@@ -43,12 +45,24 @@ const Home = () => {
 
     return (
         <div className="home-page">
-            <HeroSection stats={stats?.groupTotals ? stats : null} donorCount={donorCount || 0} />
+            <HeroSection stats={stats?.groupTotals ? stats : null} />
+            <EmergencyCarousel />
             <StatsBar stats={stats?.groupTotals ? stats : null} />
-            <WorkflowSection />
-            <ServicesSection />
-            <DonateSection />
-            <TestimonialsSection />
+            <div data-aos="fade-up" data-aos-delay="100">
+                <WorkflowSection />
+            </div>
+            <div data-aos="fade-up" data-aos-delay="150">
+                <ImpactStories />
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <ServicesSection />
+            </div>
+            <div data-aos="fade-up" data-aos-delay="250">
+                <DonateSection />
+            </div>
+            <div data-aos="fade-up" data-aos-delay="300">
+                <TestimonialsSection />
+            </div>
             <ImpactBar stats={stats?.groupTotals ? stats : null} donorCount={donorCount || 0} />
             <CtaBanner />
         </div>

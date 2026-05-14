@@ -1,0 +1,145 @@
+.a11y-toolbar {
+    background-color: var(--gray-900);
+    color: var(--gray-300);
+    padding: 0.35rem 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.a11y-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.a11y-left {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.a11y-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.a11y-link {
+    color: var(--gray-300);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.a11y-link:hover {
+    color: var(--white);
+}
+
+.skip-link {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+}
+
+.font-resizers {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.font-resizers button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--gray-300);
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.font-resizers button:hover {
+    background: var(--white);
+    color: var(--gray-900);
+}
+
+.a11y-divider {
+    width: 1px;
+    height: 16px;
+    background-color: var(--gray-700);
+}
+
+.contrast-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    border: none;
+    color: var(--gray-300);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    font-family: inherit;
+}
+
+.contrast-toggle:hover {
+    color: var(--white);
+}
+
+.language-select {
+    background: transparent;
+    border: none;
+    color: var(--gray-300);
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+}
+
+.language-select:hover {
+    color: var(--white);
+}
+
+.language-select option {
+    background: var(--gray-900);
+    color: var(--white);
+}
+
+/* HIGH CONTRAST MODE GLOBAL OVERRIDES */
+body.high-contrast-mode {
+    --primary: #FFFF00 !important;
+    --primary-dark: #CCCC00 !important;
+    --primary-bg: #000000 !important;
+    --white: #000000 !important;
+    --off-white: #000000 !important;
+    --text-dark: #FFFFFF !important;
+    --text-body: #FFFF00 !important;
+    --gray-50: #000000 !important;
+    --gray-100: #000000 !important;
+    --gray-200: #FFFFFF !important;
+    --gray-300: #FFFFFF !important;
+    --gray-800: #000000 !important;
+    --gray-900: #FFFFFF !important;
+    background-color: #000000 !important;
+    color: #FFFF00 !important;
+}
+
+body.high-contrast-mode * {
+    border-color: #FFFF00 !important;
+    box-shadow: none !important;
+}
+
+body.high-contrast-mode a {
+    color: #00FFFF !important;
+    text-decoration: underline !important;
+}
+
+body.high-contrast-mode .glass-card {
+    background: #000000 !important;
+    border: 2px solid #FFFF00 !important;
+}
