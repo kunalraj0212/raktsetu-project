@@ -17,7 +17,7 @@ const ForBloodBanks = () => {
             <section className="bb-hero">
                 <div className="container bb-hero-container">
                     <div className="bb-hero-content">
-                        <h1>Partner with RaktSetu to Save More Lives</h1>
+                        <h1>Partner with RaktaSetu to Save More Lives</h1>
                         <p>Digitize your inventory, manage donors efficiently, and respond to emergencies instantly.</p>
                         <Button variant="primary" className="btn-lg">Register Your Blood Bank</Button>
                     </div>
@@ -46,7 +46,7 @@ const ForBloodBanks = () => {
             <section className="bb-benefits">
                 <div className="container">
                     <div className="text-center section-header">
-                        <h2 className="section-title">Why Join RaktSetu?</h2>
+                        <h2 className="section-title">Why Join RaktaSetu?</h2>
                         <p className="section-subtitle">We provide a comprehensive suite of tools designed for modern blood banks.</p>
                     </div>
                     <div className="benefits-grid">

@@ -17,7 +17,7 @@ class TwilioSmsProvider extends SmsProvider {
   async sendOtp(phone, otp) {
     try {
       await this.client.messages.create({
-        body: `Your RaktSetu verification code is: ${otp}. This code expires in 10 minutes.`,
+        body: `Your RaktaSetu verification code is: ${otp}. This code expires in 10 minutes.`,
         from: this.fromPhone,
         to: `+91${phone}` // Assuming India country code
       });

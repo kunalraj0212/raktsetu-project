@@ -28,7 +28,7 @@ const ForBloodBanks = () => {
 
             <section className="section">
                 <div className="container">
-                    <h2 className="section-title text-center">Why Register with RaktSetu?</h2>
+                    <h2 className="section-title text-center">Why Register with RaktaSetu?</h2>
                     <div className="bb-benefits-grid">
                         {benefits.map((item, i) => {
                             const Icon = item.icon;
@@ -50,7 +50,7 @@ const ForBloodBanks = () => {
                 <div className="container bb-integration-grid">
                     <div className="bb-integration-content">
                         <h2 className="section-title">Seamless Integration</h2>
-                        <p>RaktSetu integrates effortlessly with your existing systems. Our platform is designed to complement your workflow, not replace it.</p>
+                        <p>RaktaSetu integrates effortlessly with your existing systems. Our platform is designed to complement your workflow, not replace it.</p>
                         <ul className="bb-checklist">
                             <li><CheckCircle size={16} className="check-green" /> No hardware installation required</li>
                             <li><CheckCircle size={16} className="check-green" /> Web-based dashboard — access from anywhere</li>

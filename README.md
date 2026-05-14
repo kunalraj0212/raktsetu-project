@@ -1,6 +1,6 @@
-# RaktSetu - Lifesaving Blood Donation Network
+# RaktaSetu - Lifesaving Blood Donation Network
 
-RaktSetu is a modern, full-stack MERN (MongoDB, Express, React, Node.js) application designed to bridge the gap between blood donors and those in critical need. 
+RaktaSetu is a modern, full-stack MERN (MongoDB, Express, React, Node.js) application designed to bridge the gap between blood donors and those in critical need. 
 
 ## 🏗️ Architecture Overview
 
@@ -8,7 +8,7 @@ The project is strictly separated into a modular frontend client and a robust ba
 
 ### Repository Structure
 - **/raksetuportalnew (Frontend):** A React/Vite application utilizing functional components, modern custom hooks (like `useForm`), and a decoupled Service layer for backend communication.
-- **/raktsetu-backend (Backend):** An ES-Module based Node.js/Express server providing RESTful APIs. It follows a strict MVC separation, ensuring controllers orchestrate flow while services handle core business logic.
+- **/raktasetu-backend (Backend):** An ES-Module based Node.js/Express server providing RESTful APIs. It follows a strict MVC separation, ensuring controllers orchestrate flow while services handle core business logic.
 
 ## 🛠️ Tech Stack
 
@@ -30,13 +30,13 @@ The project is strictly separated into a modular frontend client and a robust ba
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/kunalraj0212/raktsetu-project.git
-cd raktsetu-project
+git clone https://github.com/kunalraj0212/raktasetu-project.git
+cd raktasetu-project
 ```
 
 ### 2. Backend Setup
 ```bash
-cd raktsetu-backend
+cd raktasetu-backend
 npm install
 ```
 - Copy `.env.example` to `.env` and fill in your MongoDB Atlas credentials.

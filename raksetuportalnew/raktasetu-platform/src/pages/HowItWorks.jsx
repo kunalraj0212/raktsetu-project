@@ -43,7 +43,7 @@ const HowItWorks = () => {
         <div className="how-it-works-page">
             <section className="hiw-hero">
                 <div className="container text-center">
-                    <h1 className="section-title">How RaktSetu Works</h1>
+                    <h1 className="section-title">How RaktaSetu Works</h1>
                     <p className="section-subtitle">Simple text steps to save a life or find help.</p>
                 </div>
             </section>

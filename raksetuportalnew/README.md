@@ -1,6 +1,6 @@
-# RaktSetu — India's Blood Availability & Donation Platform
+# RaktaSetu — India's Blood Availability & Donation Platform
 
-RaktSetu is a modern web platform that connects blood donors, patients, and blood banks across India. It provides real-time blood availability search, donor registration, and emergency blood request capabilities.
+RaktaSetu is a modern web platform that connects blood donors, patients, and blood banks across India. It provides real-time blood availability search, donor registration, and emergency blood request capabilities.
 
 ## Tech Stack
 
@@ -32,8 +32,8 @@ RaktSetu is a modern web platform that connects blood donors, patients, and bloo
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/raktsetu-platform.git
-cd raktsetu-platform
+git clone https://github.com/your-username/raktasetu-platform.git
+cd raktasetu-platform
 
 # Install dependencies
 npm install

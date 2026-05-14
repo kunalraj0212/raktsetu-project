@@ -42,4 +42,16 @@ Thumbs.db
 # Temporary Files / Scripts
 test-dns.js
 test-db.js
+test-auth.js
+test-otp.js
 scratch/
+
+# Reports and Documentation (EXCLUDED PER USER REQUEST)
+docs/
+*.pdf
+*_audit.md
+*_Report.md
+codebase_analysis.md
+code_quality_security_audit.md
+raktsetu_backend_audit.md
+RaktSetu_Final_Upgrade_Report.md

@@ -47,7 +47,7 @@ const Contact = () => {
                                 <div className="ci-icon"><Mail size={20} /></div>
                                 <div>
                                     <strong>Email</strong>
-                                    <span>support@raktsetu.com</span>
+                                    <span>support@raktasetu.com</span>
                                 </div>
                             </div>
                             <div className="contact-info-item">

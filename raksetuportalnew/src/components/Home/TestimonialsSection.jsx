@@ -10,7 +10,7 @@ const TestimonialsSection = () => {
                 </div>
                 <div className="testimonials-grid">
                     <div className="testimonial-card">
-                        <div className="t-quote">"RaktSetu found O- blood for my mother within 15 minutes during her surgery. This platform literally saved her life."</div>
+                        <div className="t-quote">"RaktaSetu found O- blood for my mother within 15 minutes during her surgery. This platform literally saved her life."</div>
                         <div className="t-author">
                             <div className="t-avatar">RP</div>
                             <div>
@@ -30,7 +30,7 @@ const TestimonialsSection = () => {
                         </div>
                     </div>
                     <div className="testimonial-card">
-                        <div className="t-quote">"Our blood bank's efficiency improved 40% after joining RaktSetu. The inventory management tools are exceptional."</div>
+                        <div className="t-quote">"Our blood bank's efficiency improved 40% after joining RaktaSetu. The inventory management tools are exceptional."</div>
                         <div className="t-author">
                             <div className="t-avatar">DK</div>
                             <div>

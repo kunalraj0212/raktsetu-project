@@ -33,7 +33,7 @@ export const notifyMatchedDonors = async (donors, requestInfo, requestId, initia
   });
 
   // Dispatch real-time emergency broadcast SMS alerts
-  const smsMessage = `URGENT: ${requestInfo.requiredGroup} blood needed at ${requestInfo.hospital}, ${requestInfo.location}. Please help save a life! Log in to RaktSetu to respond.`;
+  const smsMessage = `URGENT: ${requestInfo.requiredGroup} blood needed at ${requestInfo.hospital}, ${requestInfo.location}. Please help save a life! Log in to RaktaSetu to respond.`;
   
   // Fire and forget SMS dispatch to avoid blocking the API response
   Promise.allSettled(

@@ -1,7 +1,7 @@
-# RaktSetu Robots
+# raktasetu Robots
 User-agent: *
 Allow: /
-Sitemap: https://raktsetu.com/sitemap.xml
+Sitemap: https://raktasetu.com/sitemap.xml
 
 User-agent: Googlebot
 Allow: /

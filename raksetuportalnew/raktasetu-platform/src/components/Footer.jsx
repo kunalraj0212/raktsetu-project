@@ -10,11 +10,11 @@ const Footer = () => {
                 <div className="footer-section brand-section">
                     <Link to="/" className="footer-logo">
                         <Droplet className="logo-icon" fill="currentColor" />
-                        <span className="logo-text">RaktSetu</span>
+                        <span className="logo-text">RaktaSetu</span>
                     </Link>
                     <p className="footer-tagline">Connecting Lives Through Blood.</p>
                     <p className="footer-mission">
-                        RaktSetu creates a real-time digital bridge between donors, blood banks, and patients to save lives during emergencies.
+                        RaktaSetu creates a real-time digital bridge between donors, blood banks, and patients to save lives during emergencies.
                     </p>
                 </div>
 
@@ -33,7 +33,7 @@ const Footer = () => {
                 <div className="footer-section contact-section">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><Mail size={16} /> support@raktsetu.com</li>
+                        <li><Mail size={16} /> support@raktasetu.com</li>
                         <li><Phone size={16} /> +91 98765 43210</li>
                         <li><MapPin size={16} /> Mumbai, India</li>
                     </ul>
@@ -45,7 +45,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-bottom">
-                <p>&copy; {new Date().getFullYear()} RaktSetu. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} RaktaSetu. All rights reserved.</p>
             </div>
         </footer>
     );

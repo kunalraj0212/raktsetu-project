@@ -92,7 +92,7 @@ const DonorRegistration = () => {
                                 <CheckCircle size={56} />
                             </div>
                             <h2>Registration Successful! 🎉</h2>
-                            <p>Welcome to the RaktSetu family, <strong>{registeredDonor.fullName}</strong>!</p>
+                            <p>Welcome to the RaktaSetu family, <strong>{registeredDonor.fullName}</strong>!</p>
                             <div className="dr-success-details">
                                 <div className="dr-detail">
                                     <span>Donor ID</span>

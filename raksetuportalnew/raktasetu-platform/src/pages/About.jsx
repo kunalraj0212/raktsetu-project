@@ -7,7 +7,7 @@ const About = () => {
         <div className="about-page">
             <section className="about-hero">
                 <div className="container">
-                    <h1 className="about-title">About RaktSetu</h1>
+                    <h1 className="about-title">About RaktaSetu</h1>
                     <p className="about-subtitle">
                         Our mission is to ensure that no life is lost due to the unavailability of blood.
                     </p>
@@ -19,7 +19,7 @@ const About = () => {
                     <div className="mission-content">
                         <h2>Our Mission</h2>
                         <p>
-                            RaktSetu aims to eliminate delays in blood availability by creating a connected ecosystem of donors,
+                            RaktaSetu aims to eliminate delays in blood availability by creating a connected ecosystem of donors,
                             hospitals, and patients. We believe that technology can bridge the gap between those who need help
                             and those willing to give.
                         </p>
@@ -53,7 +53,7 @@ const About = () => {
                     <div className="story-text">
                         <h2>The Story</h2>
                         <p>
-                            RaktSetu was born out of a personal experience where a critical emergency highlighted the inefficiencies
+                            RaktaSetu was born out of a personal experience where a critical emergency highlighted the inefficiencies
                             in the current blood donation system. Despite willing donors being nearby, the lack of real-time
                             information led to panic and delay.
                         </p>

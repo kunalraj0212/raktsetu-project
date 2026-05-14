@@ -74,9 +74,9 @@ const Home = () => {
                 <div className="container solution-container">
                     <div className="solution-content">
                         <span className="section-tag">Our Solution</span>
-                        <h2 className="section-title">The RaktSetu Solution</h2>
+                        <h2 className="section-title">The RaktaSetu Solution</h2>
                         <p className="solution-text">
-                            RaktSetu creates a real-time digital bridge between donors, blood banks, and patients. We digitize inventory and connect communities to ensure no one has to wait for blood.
+                            RaktaSetu creates a real-time digital bridge between donors, blood banks, and patients. We digitize inventory and connect communities to ensure no one has to wait for blood.
                         </p>
                         <ul className="solution-list">
                             <li><div className="check-icon">✓</div> Instant Availability Check</li>
@@ -89,7 +89,7 @@ const Home = () => {
                         <div className="graphic-box">
                             <div className="connection-line"></div>
                             <div className="node node-patient">Patient</div>
-                            <div className="node node-platform">RaktSetu</div>
+                            <div className="node node-platform">RaktaSetu</div>
                             <div className="node node-donor">Donor</div>
                         </div>
                     </div>
@@ -156,7 +156,7 @@ const Home = () => {
             <section className="section cta-section">
                 <div className="container cta-container">
                     <h2>Ready to Save a Life?</h2>
-                    <p>Join the RaktSetu community today. Whether you are a donor or seeking help, we are here for you.</p>
+                    <p>Join the RaktaSetu community today. Whether you are a donor or seeking help, we are here for you.</p>
                     <div className="cta-buttons">
                         <Button variant="secondary">Find Blood</Button>
                         <Button variant="primary" className="btn-white-border">Register as Donor</Button>

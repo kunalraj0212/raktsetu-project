@@ -14,7 +14,7 @@ const Navbar = () => {
     const navItems = [
         { label: 'Home', path: '/' },
         {
-            label: 'About RaktSetu', path: '/about', hasDropdown: true,
+            label: 'About RaktaSetu', path: '/about', hasDropdown: true,
             children: [
                 { label: 'Our Mission', path: '/about' },
                 { label: 'How It Works', path: '/how-it-works' },
@@ -77,7 +77,7 @@ const Navbar = () => {
                             <Droplet size={32} fill="currentColor" />
                         </div>
                         <div className="brand-text">
-                            <span className="brand-name">RaktSetu</span>
+                            <span className="brand-name">RaktaSetu</span>
                             <span className="brand-tagline">Connecting Lives Through Blood</span>
                         </div>
                     </Link>

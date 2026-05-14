@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
             <section className="legal-content">
                 <div className="container legal-body">
                     <h2>1. Information We Collect</h2>
-                    <p>We collect information you provide directly when using RaktSetu, including:</p>
+                    <p>We collect information you provide directly when using RaktaSetu, including:</p>
                     <ul>
                         <li>Name, email address, and phone number when registering</li>
                         <li>Blood group and medical information for donor registration</li>
@@ -42,13 +42,13 @@ const PrivacyPolicy = () => {
                     <p>We implement industry-standard security measures to protect your data, including encryption, secure servers, and regular security audits.</p>
 
                     <h2>5. Your Rights</h2>
-                    <p>You have the right to access, update, or delete your personal information at any time. Contact us at <strong>privacy@raktsetu.com</strong> for data-related requests.</p>
+                    <p>You have the right to access, update, or delete your personal information at any time. Contact us at <strong>privacy@raktasetu.com</strong> for data-related requests.</p>
 
                     <h2>6. Cookies</h2>
                     <p>We use essential cookies for site functionality and analytics cookies to understand user behavior. You can manage cookie preferences through your browser settings.</p>
 
                     <h2>7. Contact Us</h2>
-                    <p>For privacy-related questions, reach out to us at <strong>privacy@raktsetu.com</strong> or visit our Contact page.</p>
+                    <p>For privacy-related questions, reach out to us at <strong>privacy@raktasetu.com</strong> or visit our Contact page.</p>
                 </div>
             </section>
         </div>

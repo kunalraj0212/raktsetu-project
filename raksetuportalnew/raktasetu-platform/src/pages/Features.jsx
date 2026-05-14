@@ -33,7 +33,7 @@ const Features = () => {
         {
             icon: Shield,
             title: "Verified Community",
-            description: "All donors and blood banks are verified to ensure safety and trust within the RaktSetu ecosystem."
+            description: "All donors and blood banks are verified to ensure safety and trust within the RaktaSetu ecosystem."
         }
     ];
 
@@ -64,7 +64,7 @@ const Features = () => {
 
             <section className="features-cta">
                 <div className="container text-center">
-                    <h2>Ready to experience RaktSetu?</h2>
+                    <h2>Ready to experience RaktaSetu?</h2>
                     <div className="cta-group">
                         <Button variant="primary">Find Blood</Button>
                         <Button variant="secondary">Register as Donor</Button>

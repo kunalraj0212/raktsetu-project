@@ -1,8 +1,8 @@
 // LocalStorage-based data store for donor registrations and emergency requests
 
-const DONORS_KEY = 'raktsetu_donors';
-const EMERGENCY_KEY = 'raktsetu_emergencies';
-const APPOINTMENTS_KEY = 'raktsetu_appointments';
+const DONORS_KEY = 'raktasetu_donors';
+const EMERGENCY_KEY = 'raktasetu_emergencies';
+const APPOINTMENTS_KEY = 'raktasetu_appointments';
 
 // ==================== HELPERS ====================
 

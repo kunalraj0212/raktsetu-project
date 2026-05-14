@@ -13,7 +13,7 @@ const Footer = () => {
                         <div className="footer-logo-icon">
                             <Droplet size={24} fill="currentColor" />
                         </div>
-                        <span className="footer-brand-name">RaktSetu</span>
+                        <span className="footer-brand-name">RaktaSetu</span>
                     </Link>
                     <p className="footer-desc">
                         India's digital platform connecting blood donors, patients, and blood banks. Ensuring no life is lost due to blood unavailability.
@@ -62,7 +62,7 @@ const Footer = () => {
                 <div className="footer-col">
                     <h4>Contact Us</h4>
                     <ul className="contact-list">
-                        <li><Mail size={14} /> support@raktsetu.com</li>
+                        <li><Mail size={14} /> support@raktasetu.com</li>
                         <li><Phone size={14} /> +91 98765 43210</li>
                         <li><MapPin size={14} /> Mumbai, India</li>
                     </ul>
@@ -76,8 +76,8 @@ const Footer = () => {
 
             <div className="footer-bottom">
                 <div className="container footer-bottom-inner">
-                    <p>&copy; {new Date().getFullYear()} RaktSetu. All rights reserved.</p>
-                    <p className="disclaimer">RaktSetu is a technology platform. Always consult medical professionals for health decisions.</p>
+                    <p>&copy; {new Date().getFullYear()} RaktaSetu. All rights reserved.</p>
+                    <p className="disclaimer">RaktaSetu is a technology platform. Always consult medical professionals for health decisions.</p>
                 </div>
             </div>
         </footer>

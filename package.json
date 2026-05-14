@@ -1,0 +1,29 @@
+{
+  "name": "project-update-end-sem---cursor",
+  "version": "1.0.0",
+  "description": "RaktaSetu is a modern, full-stack MERN (MongoDB, Express, React, Node.js) application designed to bridge the gap between blood donors and those in critical need.",
+  "main": "test-auth.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kunalraj0212/raktasetu-project.git"
+  },
+  "keywords": [],
+  "author": "kunal raj",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kunalraj0212/raktasetu-project/issues"
+  },
+  "homepage": "https://github.com/kunalraj0212/raktasetu-project#readme",
+  "devDependencies": {
+    "marked": "^18.0.3",
+    "mermaid": "^11.15.0",
+    "puppeteer": "^24.43.1"
+  }
+}

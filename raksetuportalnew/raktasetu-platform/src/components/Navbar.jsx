@@ -14,7 +14,7 @@ const Navbar = () => {
             <div className="container navbar-container">
                 <Link to="/" className="navbar-logo">
                     <Droplet className="logo-icon" fill="currentColor" />
-                    <span className="logo-text">RaktSetu</span>
+                    <span className="logo-text">RaktaSetu</span>
                 </Link>
                 <div className="navbar-toggle" onClick={toggleMenu}>
                     {isOpen ? <X size={24} /> : <Menu size={24} />}

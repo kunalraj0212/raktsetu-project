@@ -32,7 +32,7 @@ app.use(express.json()); // Parses incoming JSON payloads
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({
     success: true,
-    message: 'RaktSetu API is running'
+    message: 'RaktaSetu API is running'
   });
 });
 

@@ -40,7 +40,7 @@ const Contact = () => {
                             <Mail className="info-icon" />
                             <div>
                                 <h3>Email</h3>
-                                <p>support@raktsetu.com</p>
+                                <p>support@raktasetu.com</p>
                             </div>
                         </div>
 
