@@ -38,7 +38,7 @@ const syncGovData = async () => {
         console.log('Connected to MongoDB successfully.');
 
         console.log('Fetching data from data.gov.in API...');
-        const url = `https://api.data.gov.in/resource/${RESOURCE_ID}?api-key=${API_KEY}&format=json&limit=1000`;
+        const url = `https://api.data.gov.in/resource/${RESOURCE_ID}?api-key=${API_KEY}&format=json&limit=5000`;
         
         const response = await fetch(url);
         const data = await response.json();
