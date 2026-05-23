@@ -19,7 +19,7 @@ const handleResponse = async (response) => {
 
 const apiClient = {
   get: async (endpoint, params = {}) => {
-    const baseUrl = import.meta.env.VITE_API_BASE_URL;
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://raktsetu-api-l7lm.onrender.com/api/v1';
     let url = `${baseUrl}${endpoint}`;
     
     if (Object.keys(params).length > 0) {
@@ -35,7 +35,7 @@ const apiClient = {
   },
 
   post: async (endpoint, data) => {
-    const baseUrl = import.meta.env.VITE_API_BASE_URL;
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://raktsetu-api-l7lm.onrender.com/api/v1';
     const response = await fetch(`${baseUrl}${endpoint}`, {
       method: 'POST',
       headers: getHeaders(),
@@ -45,7 +45,7 @@ const apiClient = {
   },
 
   patch: async (endpoint, data) => {
-    const baseUrl = import.meta.env.VITE_API_BASE_URL;
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://raktsetu-api-l7lm.onrender.com/api/v1';
     const response = await fetch(`${baseUrl}${endpoint}`, {
       method: 'PATCH',
       headers: getHeaders(),
@@ -55,7 +55,7 @@ const apiClient = {
   },
 
   delete: async (endpoint) => {
-    const baseUrl = import.meta.env.VITE_API_BASE_URL;
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'https://raktsetu-api-l7lm.onrender.com/api/v1';
     const response = await fetch(`${baseUrl}${endpoint}`, {
       method: 'DELETE',
       headers: getHeaders(),
