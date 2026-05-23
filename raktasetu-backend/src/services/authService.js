@@ -93,3 +93,13 @@ export const getUserById = async (userId) => {
 
   return user;
 };
+
+export const directResetPassword = async (email, newPassword) => {
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(404, 'User not found');
+  }
+  user.password = newPassword;
+  await user.save();
+  return { message: 'Password reset successfully' };
+};

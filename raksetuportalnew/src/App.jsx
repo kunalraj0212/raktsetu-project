@@ -22,7 +22,8 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const DonorDashboard = lazy(() => import('./pages/DonorDashboard'));
-
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const ResetPassword = lazy(() => import('./pages/ResetPassword'));
 // Page loading fallback
 const PageLoader = () => (
   <div style={{
@@ -75,6 +76,8 @@ function App() {
                 <Route path="register-donor" element={<DonorRegistration />} />
                 <Route path="register-bloodbank" element={<BloodBankRegistration />} />
                 <Route path="login" element={<Login />} />
+                <Route path="forgot-password" element={<ForgotPassword />} />
+                <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="emergency" element={<ProtectedRoute><EmergencyRequest /></ProtectedRoute>} />
                 <Route path="donor-dashboard" element={<ProtectedRoute><DonorDashboard /></ProtectedRoute>} />
                 <Route path="privacy" element={<PrivacyPolicy />} />

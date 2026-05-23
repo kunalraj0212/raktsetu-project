@@ -1,4 +1,4 @@
-import { registerUser, loginUser, getUserById } from '../services/authService.js';
+import { registerUser, loginUser, getUserById, directResetPassword } from '../services/authService.js';
 import asyncHandler from '../utils/asyncHandler.js';
 
 export const register = asyncHandler(async (req, res) => {
@@ -26,4 +26,10 @@ export const getCurrentUser = asyncHandler(async (req, res) => {
   const user = await getUserById(req.user.id);
   
   res.status(200).json({ success: true, data: user });
+});
+
+export const resetPassword = asyncHandler(async (req, res) => {
+  const { email, newPassword } = req.body;
+  const result = await directResetPassword(email, newPassword);
+  res.status(200).json({ success: true, data: result });
 });

@@ -24,3 +24,8 @@ export const getCurrentUser = async () => {
 export const logoutUser = () => {
     localStorage.removeItem('token');
 };
+
+export const resetPassword = async (email, newPassword) => {
+    const response = await apiClient.post('/auth/reset-password-direct', { email, newPassword });
+    return response.data;
+};
