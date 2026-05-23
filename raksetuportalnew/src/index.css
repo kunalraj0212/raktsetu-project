@@ -217,3 +217,37 @@ h6 {
     font-size: 1.5rem;
   }
 }
+
+/* HIGH CONTRAST MODE GLOBAL OVERRIDES */
+body.high-contrast-mode {
+    --primary: #FFFF00 !important;
+    --primary-dark: #CCCC00 !important;
+    --primary-bg: #000000 !important;
+    --white: #000000 !important;
+    --off-white: #000000 !important;
+    --text-dark: #FFFFFF !important;
+    --text-body: #FFFF00 !important;
+    --gray-50: #000000 !important;
+    --gray-100: #000000 !important;
+    --gray-200: #FFFFFF !important;
+    --gray-300: #FFFFFF !important;
+    --gray-800: #000000 !important;
+    --gray-900: #FFFFFF !important;
+    background-color: #000000 !important;
+    color: #FFFF00 !important;
+}
+
+body.high-contrast-mode * {
+    border-color: #FFFF00 !important;
+    box-shadow: none !important;
+}
+
+body.high-contrast-mode a {
+    color: #00FFFF !important;
+    text-decoration: underline !important;
+}
+
+body.high-contrast-mode .glass-card {
+    background: #000000 !important;
+    border: 2px solid #FFFF00 !important;
+}
