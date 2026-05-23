@@ -22,9 +22,16 @@ const corsOptions = {
   origin: function (origin, callback) {
     if (!origin) return callback(null, true);
     
+    const defaultOrigins = [
+      'http://localhost:5173', 
+      'http://localhost:5174',
+      'https://raktasetu.online',
+      'https://www.raktasetu.online',
+      'https://raktsetu-api-l7lm.onrender.com'
+    ];
     const allowedOrigins = process.env.CORS_ORIGIN
-      ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
-      : ['http://localhost:5173', 'http://localhost:5174'];
+      ? [...process.env.CORS_ORIGIN.split(',').map(o => o.trim()), ...defaultOrigins]
+      : defaultOrigins;
       
     if (allowedOrigins.indexOf(origin) !== -1) {
       return callback(null, true);
